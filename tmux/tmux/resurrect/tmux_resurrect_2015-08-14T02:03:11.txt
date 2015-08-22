@@ -1,0 +1,11 @@
+pane	0	0	:git	1	:*	0	:/home/anmol/Visualization	1	git	:git commit --amend -s
+pane	0	0	:git	1	:*	1	:/home/anmol/Visualization/test	0	zsh	:
+pane	0	0	:git	1	:*	2	:/home/anmol/.themes/Flatabulous	0	zsh	:
+pane	0	1	:..eous-Terminal	0	:-	0	:/home/anmol/Gorgeous-Terminal	1	zsh	:
+pane	0	2	:~/dotfiles	0	: 	0	:/home/anmol/dotfiles	1	zsh	:
+pane	4	0	:~	1	:*	0	:/home/anmol	1	zsh	:
+window	0	0	1	:*	3a95,143x40,0,0{88x40,0,0,1,54x40,89,0[54x26,89,0,2,54x13,89,27,3]}
+window	0	1	0	:-	ad01,143x40,0,0,4
+window	0	2	0	: 	ad02,143x40,0,0,5
+window	4	0	1	:*	ad03,143x40,0,0,6
+state	0	4

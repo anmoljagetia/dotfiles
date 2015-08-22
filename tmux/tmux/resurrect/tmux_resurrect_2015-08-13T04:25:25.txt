@@ -1,0 +1,9 @@
+pane	0	0	:GSoC	0	: 	0	:/home/anmol/Visualization	1	zsh	:
+pane	0	0	:GSoC	0	: 	1	:/home/anmol/Visualization/test	0	zsh	:
+pane	0	0	:GSoC	0	: 	2	:/home/anmol/.themes/Flatabulous	0	zsh	:
+pane	0	1	:..eous-Terminal	0	:-	0	:/home/anmol/Gorgeous-Terminal	1	zsh	:
+pane	0	2	:~Dotfiles	1	:*	0	:/home/anmol	1	zsh	:
+window	0	0	0	: 	3a95,143x40,0,0{88x40,0,0,1,54x40,89,0[54x26,89,0,2,54x13,89,27,3]}
+window	0	1	0	:-	ad04,143x40,0,0,7
+window	0	2	1	:*	ad06,143x40,0,0,9
+state	0	0

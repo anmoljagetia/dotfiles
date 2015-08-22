@@ -1,0 +1,5 @@
+pane	0	0	:..ples/overview	1	:*	0	:/home/anmol/.themes/terminal-themes	0	zsh	:
+pane	0	0	:..ples/overview	1	:*	1	:/home/anmol/Visualization	1	zsh	:
+pane	0	0	:..ples/overview	1	:*	2	:/home/anmol/test/dbox-examples/overview	0	zsh	:
+window	0	0	1	:*	8c6a,145x40,0,0{87x40,0,0,1,57x40,88,0[57x23,88,0,2,57x16,88,24,3]}
+state	0	0

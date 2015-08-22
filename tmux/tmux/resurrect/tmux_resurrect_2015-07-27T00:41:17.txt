@@ -1,0 +1,5 @@
+pane	0	0	:../src/timeline	1	:*	0	:/home/anmol/Visualization/src/timeline	1	zsh	:
+pane	0	0	:../src/timeline	1	:*	1	:/home/anmol/Visualization	0	zsh	:
+pane	0	0	:../src/timeline	1	:*	2	:/home/anmol	0	zsh	:
+window	0	0	1	:*	9e2a,145x40,0,0{87x40,0,0,1,57x40,88,0[57x24,88,0,2,57x15,88,25,3]}
+state	0	0

@@ -1,0 +1,5 @@
+pane	0	0	:ping	1	:*	0	:/home/anmol/Visualization/src/timeline	0	zsh	:
+pane	0	0	:ping	1	:*	1	:/home/anmol/Visualization	0	zsh	:
+pane	0	0	:ping	1	:*	2	:/home/anmol	1	ping	:ping 172.31.1.6
+window	0	0	1	:*	9e2a,145x40,0,0{87x40,0,0,1,57x40,88,0[57x24,88,0,2,57x15,88,25,3]}
+state	0	0

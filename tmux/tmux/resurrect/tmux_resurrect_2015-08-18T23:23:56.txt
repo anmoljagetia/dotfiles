@@ -1,0 +1,11 @@
+pane	0	0	:npm	1	:*	0	:/home/anmol/Visualization	1	sudo	:sudo npm install
+pane	0	0	:npm	1	:*	1	:/home/anmol/Visualization/test	0	zsh	:
+pane	0	0	:npm	1	:*	2	:/home/anmol/Visualization	0	zsh	:
+pane	0	1	:..eous-Terminal	0	: 	0	:/home/anmol/Gorgeous-Terminal	1	zsh	:
+pane	0	2	:~/dotfiles	0	:-	0	:/home/anmol/dotfiles	1	zsh	:
+pane	4	0	:~	1	:*	0	:/home/anmol	1	zsh	:
+window	0	0	1	:*	2a0c,145x40,0,0{89x40,0,0,1,55x40,90,0[55x26,90,0,2,55x13,90,27,3]}
+window	0	1	0	: 	ae01,145x40,0,0,4
+window	0	2	0	:-	ae02,145x40,0,0,5
+window	4	0	1	:*	ae03,145x40,0,0,6
+state	0	4

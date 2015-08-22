@@ -1,0 +1,14 @@
+pane	0	0	:~/Visualization	1	:*	0	:/home/anmol/Visualization	1	zsh	:
+pane	0	0	:~/Visualization	1	:*	1	:/home/anmol/Visualization/src/chart	0	zsh	:
+pane	0	0	:~/Visualization	1	:*	2	:/home/anmol	0	zsh	:
+pane	10	0	:~	1	:*	0	:/home/anmol	1	zsh	:
+pane	11	0	:~	1	:*	0	:/home/anmol	1	zsh	:
+pane	12	0	:~	1	:*	0	:/home/anmol	1	zsh	:
+pane	6	0	:..ion/src/chart	1	:*	0	:/home/anmol/Visualization	1	zsh	:
+pane	6	0	:..ion/src/chart	1	:*	1	:/home/anmol/Visualization/src/chart	0	zsh	:
+window	0	0	1	:*	042c,145x40,0,0{76x40,0,0,0,68x40,77,0[68x20,77,0,1,68x19,77,21,17]}
+window	10	0	1	:*	5733,145x40,0,0,14
+window	11	0	1	:*	5734,145x40,0,0,15
+window	12	0	1	:*	5765,80x23,0,0,16
+window	6	0	1	:*	12f9,145x40,0,0{74x40,0,0,9,70x40,75,0,10}
+state	0	12

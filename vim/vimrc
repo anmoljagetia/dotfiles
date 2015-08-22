@@ -1,0 +1,73 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" Track the engine.
+
+Plugin 'SirVer/ultisnips'
+"
+" " Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+
+
+execute pathogen#infect()
+
+"Syntax Higlighting
+syntax on
+
+filetype plugin indent on
+
+"Mapping a new Shortcut for NerdTree
+map <C-n> :NERDTreeToggle<CR>
+
+"Map F8 to run cpp files
+map <F8> :!g++ % && ./a.out <CR>
+
+"Set paste activates P as paste
+set paste
+
+set clipboard=unnamed
+set number
+set tabstop=4 shiftwidth=4 expandtab
+
+"Close vim if only NERDTree is open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+
+set laststatus=2
+
+"Setting the colorscheme as Monokai
+"colorscheme Monokai
+colorscheme Monokai-chris
+"colorscheme Tomorrow
+"colorscheme elda
+"colorscheme cool (very high contrast)
+"colorscheme dual (very green and very contrasty!)
+"colorscheme flatlandia
+
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
