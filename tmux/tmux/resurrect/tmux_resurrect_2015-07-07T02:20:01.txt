@@ -1,7 +1,0 @@
-pane	0	0	:~/Visualization	1	:*	0	:/home/anmol/Visualization	0	zsh	:
-pane	0	0	:~/Visualization	1	:*	1	:/home/anmol/Visualization/src/chart	1	zsh	:
-pane	6	0	:~/Visualization	1	:*	0	:/home/anmol/Visualization	1	zsh	:
-pane	6	0	:~/Visualization	1	:*	1	:/home/anmol/Visualization/src/chart	0	zsh	:
-window	0	0	1	:*	bacb,151x41,0,0{100x41,0,0,0,50x41,101,0,1}
-window	6	0	1	:*	38e9,80x23,0,0{40x23,0,0,9,39x23,41,0,10}
-state	6	

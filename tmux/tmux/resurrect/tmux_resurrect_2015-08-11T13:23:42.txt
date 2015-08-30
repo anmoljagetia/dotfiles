@@ -1,5 +1,0 @@
-pane	0	0	:~/Visualization	1	:*	0	:/home/anmol/Visualization	1	zsh	:
-pane	0	0	:~/Visualization	1	:*	1	:/home/anmol/Visualization	0	zsh	:
-pane	0	0	:~/Visualization	1	:*	2	:/home/anmol/imageUploader/dailyjs-cloudinary-gallery	0	zsh	:
-window	0	0	1	:*	184c,145x40,0,0{89x40,0,0,1,55x40,90,0[55x25,90,0,2,55x14,90,26,3]}
-state	0	0

@@ -1,5 +1,0 @@
-pane	0	0	:..ion/src/chart	1	:*	0	:/home/anmol/Visualization	0	zsh	:
-pane	0	0	:..ion/src/chart	1	:*	1	:/home/anmol/Visualization/src/chart	0	zsh	:
-pane	0	0	:..ion/src/chart	1	:*	2	:/home/anmol	1	zsh	:
-window	0	0	1	:*	61ab,80x23,0,0{43x23,0,0,1,36x23,44,0[36x11,44,0,2,36x11,44,12,3]}
-state	0	

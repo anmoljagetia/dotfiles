@@ -1,5 +1,0 @@
-pane	0	0	:~/Visualization	1	:*	0	:/home/anmol/Visualization	1	zsh	:
-pane	0	0	:~/Visualization	1	:*	1	:/home/anmol/Visualization	0	git	:git log --oneline --decorate --color --graph
-pane	0	0	:~/Visualization	1	:*	2	:/home/anmol/Desktop	0	zsh	:
-window	0	0	1	:*	e78e,145x40,0,0{84x40,0,0,1,60x40,85,0[60x27,85,0,2,60x12,85,28,3]}
-state	0	0

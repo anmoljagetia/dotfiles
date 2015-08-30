@@ -1,5 +1,0 @@
-pane	0	0	:~/Visualization	1	:*	0	:/home/anmol/Visualization	1	zsh	:
-pane	0	0	:~/Visualization	1	:*	1	:/home/anmol/Visualization	0	zsh	:
-pane	0	0	:~/Visualization	1	:*	2	:/home/anmol	0	zsh	:
-window	0	0	1	:*	afea,145x40,0,0{87x40,0,0,1,57x40,88,0[57x25,88,0,2,57x14,88,26,3]}
-state	0	0
