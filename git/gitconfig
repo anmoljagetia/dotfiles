@@ -1,3 +1,26 @@
+[alias]
+	dfm = diff --color --color-words --abbrev
+[color]
+	ui = always
+[apply]
+	whitespace = fix
+[core]
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
+	whitespace = fix,space-before-tab,tab-in-indent,trailing-space
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
 [user]
 	email = anmoljagetia@gmail.com
 	name = Anmol Jagetia
@@ -6,10 +29,6 @@
 [http]
 [https]
 [url "http://"]
-[http]
-[https]
-[url "http://"]
-[http]
 	proxy = http://172.31.1.4:8080
 [https]
 	proxy = http://172.31.1.4:8080

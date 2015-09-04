@@ -1,0 +1,11 @@
+set_proxy() {
+    export HTTP_PROXY=http://172.31.1.4:8080
+    export HTTPS_PROXY=http://172.31.1.4:8080
+    # some tools uses lowercase env variables
+    export http_proxy=http://172.31.1.4:8080
+    export https_proxy=http://172.31.1.4:8080
+    # config git
+    git config --global http.proxy http://172.31.1.4:8080
+    git config --global https.proxy http://172.31.1.4:8080
+    git config --global url."http://".insteadOf git://
+}

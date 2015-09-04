@@ -1,0 +1,6 @@
+# ~/.zomg/fns/acme
+
+autoload colors; colors
+rc=$reset_color # because I'm laaaaaazy
+
+print -- $fg[blue] \⚛ $rc "$@"
