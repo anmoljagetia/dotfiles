@@ -1,0 +1,24 @@
+# A better git clone
+clone() {
+  # customize username to your own 
+  local username="anmoljagetia"
+
+  local url=$1;
+  local repo=$2;
+
+  if [[ ${url:0:4} == 'http' || ${url:0:3} == 'git' ]]
+  then
+    # just clone this thing.
+    repo=$(echo $url | awk -F/ '{print $NF}' | sed -e 's/.git$//');
+  elif [[ -z $repo ]]
+  then
+    # my own stuff.
+    repo=$url;
+    url="git@github.com:$username/$repo";
+  else
+    # not my own, but I know whose it is.
+    url="git@github.com:$url/$repo.git";
+  fi
+
+  git clone $url $repo && cd $repo && subl .;
+}

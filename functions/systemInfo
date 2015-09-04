@@ -1,4 +1,0 @@
-systemInfo() {
-    # Temporary function stub
-    echo "function system_info"
-}

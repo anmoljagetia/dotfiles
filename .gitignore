@@ -4,6 +4,5 @@ vim/vim
 zsh/oh-my-zsh
 themes
 icons
-
 tmux/tmux/resurrect
 tmux/tmux/plugins/
