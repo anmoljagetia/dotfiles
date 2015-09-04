@@ -83,6 +83,9 @@ alias zshconfig="subl ~/.zshrc"
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=$PATH:~/dotfiles/bin 
 
+#autoloads the ~/dotfiles/functions directory 
+export FPATH=~/dotfiles/functions:$FPATH
+autoload -Uz ~/dotfiles/functions/**/[^_+]*(N^/:t) zmv edit-command-line
 ########## Adding your Own ##############
 ##########      RULES	   ##############
 
@@ -91,8 +94,8 @@ export PATH=$PATH:~/dotfiles/bin
 #sleep 1
 #clear
 
+
 #-------User Alias--------#
 alias xclip="xclip -selection c"
-
 
 
