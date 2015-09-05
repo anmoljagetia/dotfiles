@@ -39,7 +39,7 @@ COMPLETION_WAITING_DOTS="true"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+ZSH_CUSTOM=/home/anmol/dotfiles/zsh/custom
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -77,7 +77,6 @@ export LANG=en_US.UTF-8
 #
 # Example aliases
 alias zshconfig="subl ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -86,6 +85,16 @@ export PATH=$PATH:~/dotfiles/bin
 #autoloads the ~/dotfiles/functions directory 
 export FPATH=~/dotfiles/functions:$FPATH
 autoload -Uz ~/dotfiles/functions/**/[^_+]*(N^/:t) zmv edit-command-line
+
+#lines added to remove use of sudo with npm install
+NPM_PACKAGES="${HOME}/.npm-packages"
+NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+PATH="$NPM_PACKAGES/bin:$PATH"
+MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
+#list installed node packages
+alias npl="npm list -g --depth=0"
+
 ########## Adding your Own ##############
 ##########      RULES	   ##############
 

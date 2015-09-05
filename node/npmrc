@@ -1,3 +1,9 @@
+#user directory for npm packages (installed without sudo)
+prefix=${HOME}/.npm-packages
+
+#npm registry
 registry = http://registry.npmjs.org/
+
+#University proxy settings
 proxy = http://172.31.1.4:8080/
 https-proxy = http://172.31.1.4:8080
