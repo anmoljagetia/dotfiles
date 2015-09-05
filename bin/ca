@@ -1,0 +1,4 @@
+#!/usr/bin/zsh
+# A more colorful version of `cat`
+pygmentize -O style=rrt -f console256 -g "$@"
+
