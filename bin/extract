@@ -19,6 +19,7 @@ if [ -f $1 ]; then
         *.pax)      cat $1 | pax -r                     ;;
         *.pax.Z)    uncompress $1 --stdout | pax -r     ;;
         *.Z)        uncompress $1                       ;;
+        *.7z)       7z x $1                             ;;
         *)          echo "'$1' cannot be extracted/mounted via extract()" ;;
     esac
 else
