@@ -1,26 +1,63 @@
-#!/bin/bash
-# modified from http://ficate.com/blog/2012/10/15/battery-life-in-the-land-of-tmux/
+#!/usr/bin/zsh
+HEART='❤ '
+SLOTS_MAX=10
+SLOTS_WARNING=5
+SLOTS_CRITICAL=3
 
-HEART='♥ '
+BATTERY=BAT1
+
+while [ $# -gt 0 ] ; do
+	case $1 in
+		percent) unset HEART ; SLOTS_MAX=100 ; SLOTS_WARNING=50 ; SLOTS_CRITICAL=30 ;;
+		slots_max=*) SLOTS_MAX=${1##slots_max=} ;;
+		slots_warning=*) SLOTS_WARNING=${1##slots_warning=} ;;
+		slots_critical=*) SLOTS_CRITICAL=${1##slots_critical=} ;;
+		battery=*) BATTERY=${1##battery=} ;;
+	esac
+	shift
+done
 
 if [[ `uname` == 'Linux' ]]; then
-  current_charge=$(cat /proc/acpi/battery/BAT1/state | grep 'remaining capacity' | awk '{print $3}')
-  total_charge=$(cat /proc/acpi/battery/BAT1/info | grep 'last full capacity' | awk '{print $4}')
+  current_charge=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep percentage | awk '{print $2}' | sed 's/%//g')
+  total_charge=100
 else
   battery_info=`ioreg -rc AppleSmartBattery`
   current_charge=$(echo $battery_info | grep -o '"CurrentCapacity" = [0-9]\+' | awk '{print $3}')
   total_charge=$(echo $battery_info | grep -o '"MaxCapacity" = [0-9]\+' | awk '{print $3}')
 fi
 
-charged_slots=$(echo "((($current_charge/$total_charge)*10)/3)+1" | bc -l | cut -d '.' -f 1)
-if [[ $charged_slots -gt 3 ]]; then
-  charged_slots=3
+#charged_slots=$(echo "((($current_charge/$total_charge)*10)/3)+1" | bc -l | cut -d '.' -f 1)
+charged_slots=$(( ${current_charge} * 100 / ${total_charge} * ${SLOTS_MAX} / 100 ))
+if [[ ${charged_slots} -gt ${SLOTS_MAX} ]] ; then
+	charged_slots=${SLOTS_MAX}
 fi
 
-echo -n '#[fg=colour196]'
-for i in `seq 1 $charged_slots`; do echo -n "$HEART"; done
-
-if [[ $charged_slots -lt 3 ]]; then
-  echo -n '#[fg=colour254]'
-  for i in `seq 1 $(echo "3-$charged_slots" | bc)`; do echo -n "$HEART"; done
+if [[ "${HEART}" ]] ; then
+	if [ "${charged_slots}" -lt "${SLOTS_CRITICAL}" ] ; then
+		echo -n '#[fg=red,blink]'
+	else
+		echo -n '#[fg=red]'
+	fi
+	for i in $(seq 1 ${charged_slots}) ; do
+		echo -n "${HEART}"
+	done
+	echo -n '#[fg=white,noblink]'
+	for i in $(seq 1 $(( ${SLOTS_MAX} - ${charged_slots} ))) ; do
+		echo -n "${HEART}"
+	done
+else
+	if [ "${charged_slots}" -lt "${SLOTS_CRITICAL}" ] ; then
+		echo -n '#[fg=red,blink]'
+	elif [ "${charged_slots}" -lt "${SLOTS_WARNING}" ] ; then
+		echo -n '#[fg=yellow]'
+	else
+		echo -n '#[fg=green]'
+	fi
+	case "${charging}" in
+		discharging) echo -n '-' ;;
+		charging) echo -n '+' ;;
+		charged) echo -n '=' ;;
+		*) ;;
+	esac
+	echo -n "${charged_slots}%#[noblink]"
 fi
