@@ -27,7 +27,7 @@ end
 output = `curl -i http://git.io -F 'url=#{url}' #{code} 2> /dev/null`
 if output =~ /Location: (.+)\n?/
   puts $1
-  `echo #$1 | pbcopy`
+  `echo #$1 | xclip`
 else
   puts output
 end

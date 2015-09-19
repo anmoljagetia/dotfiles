@@ -113,3 +113,5 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 # File size
 alias fs="stat -f \"%z bytes\""
 
+#fixes vim colors in tmux mode
+export TERM="xterm-256color"
