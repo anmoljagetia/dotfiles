@@ -21,6 +21,7 @@ files="atom
 	bash/bashrc
 	mongo/mongorc.js
 	heroku/netrc
+	emacs/spacemacs
 "    # list of files/folders to symlink in homedir
 ##########
 
