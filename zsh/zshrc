@@ -46,7 +46,7 @@ ZSH_CUSTOM=~/oh-my-zsh/custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git github python sublime history-substring-search zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git github python sublime zsh-autosuggestions zsh-syntax-highlighting history-substring-search)
 #plugins=(git zsh-syntax-highlighting github last-working-dir python sublime)
 source $ZSH/oh-my-zsh.sh
 
