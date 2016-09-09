@@ -5,7 +5,7 @@
 [apply]
 	whitespace = fix
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore_global
 	attributesfile = ~/.gitattributes
 	whitespace = fix,space-before-tab,tab-in-indent,trailing-space
 [color "branch"]
@@ -26,9 +26,3 @@
 	name = Anmol Jagetia
 [push]
 	default = simple
-[http]
-	proxy = http://172.31.1.4:8080
-[https]
-	proxy = http://172.31.1.4:8080
-[url "http://"]
-	insteadOf = git://
