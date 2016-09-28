@@ -1,33 +1,20 @@
-#!/usr/bin/env ruby
-# Usage: gitio URL [CODE]
-#
-# Turns a github.com URL
-#  into a git.io URL
-#
-# Created by @defunkt:
-#  https://gist.github.com/1209316 
-#
-# Copies the git.io URL to your clipboard.
+#!/bin/sh
 
-url  = ARGV[0]
-code = ARGV[1]
+host=https://git.io
 
-if url !~ /^(https?:\/\/)?(gist\.)?github.com/
-  abort "* github.com URLs only"
-end
+usage() {
+  cat <<EOM
+Shorten Github URL from the command line.
+usage: gitio [link1] [link2] .....
+       The first link is copied on the clipboard (OS X) using pbcopy
+EOM
+}
+if [[ ! "$1" ]]; then
+  usage
+  exit 1
+fi
 
-if url !~ /^http/
-  url = "https://#{url}"
-end
-
-if code
-  code = "-F code=#{code}"
-end
-
-output = `curl -i http://git.io -F 'url=#{url}' #{code} 2> /dev/null`
-if output =~ /Location: (.+)\n?/
-  puts $1
-  `echo #$1 | xclip`
-else
-  puts output
-end
+while [[ $# -gt 0 ]]; do
+    curl -is $host -F "url=$1" | grep Location | awk '{ print $2 }' | pbcopy && pbpaste
+  shift
+done
