@@ -1,6 +1,6 @@
 retry() {
-  echo Retrying "$@"
-  $@
-  sleep 1
-  retry $@
+    echo "Retrying $@"
+    until $@; do
+        sleep 1
+    done
 }
