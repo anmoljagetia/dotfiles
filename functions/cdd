@@ -1,0 +1,15 @@
+## Thanks to Rohit-H for this.
+## Run cdd to fetch list of directory paths you've recently been
+## Run cdd N to go to that location
+cdd() {
+    local histfile="$HOME/.dirhistory.$UID"
+    local histlist=`uniq "$histfile" | sed "s@${PWD}@.@g" | tail -n 20 | tac`
+
+    if [ $# -eq 0 ]; then
+        echo "$histlist" | cat -n
+    else
+        local dir="`echo "$histlist" | sed -n "$1 p"`"
+        echo " >>> $dir"
+        command cd "$dir"
+    fi
+}
