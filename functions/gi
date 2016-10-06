@@ -1,0 +1,11 @@
+#!/usr/local/bin/zsh
+#
+# Thanks to gitignore.io for this awesome utility!
+# Generate gitignore files from the command line
+# usage: gitio [link1],[link2], .....
+#        gitio osx,python,emacs ...
+
+gi() {
+    curl -L -s https://www.gitignore.io/api/$@ ;
+}
+
