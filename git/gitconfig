@@ -1,13 +1,14 @@
 [alias]
 	dfm = diff --color --color-words --abbrev
 [color]
-	ui = always
+        ui = auto
 [apply]
 	whitespace = fix
 [core]
 	excludesfile = ~/.gitignore_global
 	attributesfile = ~/.gitattributes
 	whitespace = fix,space-before-tab,tab-in-indent,trailing-space
+        pager = less -r
 [color "branch"]
 	current = yellow reverse
 	local = yellow
