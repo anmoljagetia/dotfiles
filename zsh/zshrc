@@ -104,9 +104,22 @@ alias xclip="xclip -selection c"
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="localip() {ifconfig | grep 'inet ' | tail -n 1 | awk '{print \$2}'};localip"
 
 # File size
 alias fs="stat -f \"%z bytes\""
 
-#fixes vim colors in tmux mode
+# Fixes vim colors in tmux mode
 export TERM="xterm-256color"
+
+# User Git Aliases
+alias gbd='git-better-diff'
+
+# Pipe my public key to my clipboard.
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+
+# Adds the Latex binaries to PATH
+export PATH=$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
+
+# Iterm zsh shell integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
