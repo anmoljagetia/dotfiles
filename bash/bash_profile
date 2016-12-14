@@ -1,0 +1,18 @@
+# Path variables
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+# Path added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# Path for user installed Binaries
+export PATH=$PATH:~/dotfiles/bin 
+
+# Adds the Latex binaries to PATH
+export PATH=$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
+
+# Lines added to remove use of sudo with npm install
+export PATH="$NPM_PACKAGES/bin:$PATH"
+export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
