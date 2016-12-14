@@ -52,12 +52,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
-
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -79,10 +73,6 @@ export LANG=en_US.UTF-8
 # Example aliases
 alias zshconfig="subl ~/.zshrc"
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-export PATH=$PATH:~/dotfiles/bin 
-
 #autoloads the ~/dotfiles/functions directory 
 export FPATH=~/dotfiles/functions:$FPATH
 autoload -Uz ~/dotfiles/functions/**/[^_+]*(N^/:t) zmv edit-command-line
@@ -90,8 +80,8 @@ autoload -Uz ~/dotfiles/functions/**/[^_+]*(N^/:t) zmv edit-command-line
 #lines added to remove use of sudo with npm install
 NPM_PACKAGES="${HOME}/.npm-packages"
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-PATH="$NPM_PACKAGES/bin:$PATH"
-MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+#PATH="$NPM_PACKAGES/bin:$PATH"
+#MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 #list installed node packages
 alias npl="npm list -g --depth=0"
@@ -119,10 +109,7 @@ alias gbd='git-better-diff'
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 # Pipe AWS OTP into the system clipboard.
-alias awsotp="aws_otp | tee >(pbcopy) >(cat) | echo '=> Copied AWS OTP to clipboard.'"
-
-# Adds the Latex binaries to PATH
-export PATH=$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
+alias awsotp="aws_otp | tee >(pbcopy) && echo '=> Copied AWS OTP to pasteboard.'"
 
 # Recursively delete `.DS_Store` files
 #alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
