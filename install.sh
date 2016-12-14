@@ -13,12 +13,14 @@ files="atom
 	node/npmrc
 	zsh/oh-my-zsh
 	zsh/zshrc
+	zsh/zshenv
 	vim/vim
 	vim/vimrc
 	tmux/tmux.conf
 	tmux/tmux
 	git/gitconfig
 	bash/bashrc
+	bash/bash_profile
 	mongo/mongorc.js
 	heroku/netrc
 	emacs/spacemacs
