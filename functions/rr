@@ -1,0 +1,13 @@
+# Better remove then rm using the gomi binary
+# Usage rr filename1, filename2, ....
+# 
+# This will move all the files into the Trash, and then
+# they can be restores using another utility called rrs
+rr() {
+    if [[ "$(uname)" == "Darwin" ]]; then
+        echo "Moved to Trash : $@"       
+        gomi -s "$@"
+    elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
+        gomi "$@"
+    fi
+}

@@ -1,0 +1,5 @@
+# Restores files from Trash using gomi -r
+rrs() {
+    gomi -r 
+}
+
