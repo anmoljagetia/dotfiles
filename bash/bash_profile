@@ -14,5 +14,7 @@ export PATH=$PATH:~/dotfiles/bin
 export PATH=$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
 
 # Lines added to remove use of sudo with npm install
+export NPM_PACKAGES="${HOME}/.npm-packages"
+export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 export PATH="$NPM_PACKAGES/bin:$PATH"
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
