@@ -1,1 +1,2 @@
+skip_global_compinit=1
 source ~/.bash_profile
