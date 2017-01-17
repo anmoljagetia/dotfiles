@@ -9,6 +9,7 @@
 	attributesfile = ~/.gitattributes
 	whitespace = fix,space-before-tab,tab-in-indent,trailing-space
         pager = less -r
+	editor = /usr/local/bin/vim
 [color "branch"]
 	current = yellow reverse
 	local = yellow
@@ -23,13 +24,7 @@
 	changed = green
 	untracked = cyan
 [user]
-	email = anmoljagetia@gmail.com
+	email = anmol.j@media.net
 	name = Anmol Jagetia
 [push]
 	default = simple
-[difftool "sourcetree"]
-        cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-        path =
-[mergetool "sourcetree"]
-        cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-        trustExitCode = true
