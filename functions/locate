@@ -1,0 +1,6 @@
+#Uses spotlight as backend for locate on Macos
+
+locate() {
+    mdfind -name "$@"
+    #mdfind "kMDItemDisplayName == '$@'wc";
+}
