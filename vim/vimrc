@@ -11,13 +11,13 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
-Plugin 'Shougo/neocomplete'
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neosnippet-snippets'
+"Plugin 'Shougo/neocomplete'
+"Plugin 'Shougo/neosnippet'
+"Plugin 'Shougo/neosnippet-snippets'
 Plugin 'scrooloose/nerdtree'
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
 Plugin 'davidhalter/jedi-vim'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 
 " All of your Plugins must be added before the following line
@@ -47,27 +47,6 @@ filetype plugin indent on    " required
 "  syntax on
 "endif
 
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#snippets_directory='/home/anmol/dotfiles/vim/vim/bundle'
-
-" Plugin key-mappings.
-imap <C-x>     <Plug>(neosnippet_expand_or_jump)
-smap <C-x>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-x>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 "set background=dark
@@ -78,8 +57,8 @@ endif
 "  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 "endif
 
-"Mappings
-"autocmd filetype python nnoremap <F5> :w <bar> exec '!python '.shellescape('%')<CR>
+"mappings
+"autocmd filetype python nnoremap <f5> :w <bar> exec '!python '.shellescape('%')<cr>
 "autocmd filetype c nnoremap <F5> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 "autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -ggdb -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
@@ -94,7 +73,7 @@ autocmd BufNewFile *.cpp r /home/lenovo/template.cpp
 
 set t_Co=256
 set background=light
-set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Bold\14
+set guifont=Source\ Code\ Pro\14
 let g:molokai_original = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -110,9 +89,9 @@ set laststatus=2
 
 " Uncomment the following to have Vim load indentation rules and plugins
 " according to the detected filetype.
-"if has("autocmd")
-"  filetype plugin indent on
-"endif
+if has("autocmd")
+  filetype plugin indent on
+endif
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 
@@ -130,7 +109,23 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 syntax on
-" Source a global configuration file if available
-if filereadable("/etc/vim/vimrc.local")
-  source /etc/vim/vimrc.local
-endif
+
+" => Turn persistent undo on 
+"    means that you can undo even when you close a buffer/VIM
+try
+    set undodir=~/.vim/temp/undodir
+    set undofile
+catch
+endtry
+
+" Adds the following to edit files without opening them as sudo
+cmap w!! w !sudo tee > /dev/null %
+
+" Leave insert mode without ESC key
+inoremap fj <ESC>
+
+" Remap leader to SPACE key.
+let mapleader = "\<Space>"
+
+" Set Clipboard to MacOS
+set clipboard=unnamed
