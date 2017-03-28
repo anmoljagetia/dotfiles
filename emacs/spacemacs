@@ -18,38 +18,57 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     yaml
+     (javascript :variables
+                 javascript-disable-tern-port-files nil)
+     html
+     colors
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-help-tooltip 'manual)
      python
      ipython-notebook
+     semantic
      better-defaults
+     osx
      emacs-lisp
      git
-     latex
+     (latex :variables latex-build-command "LatexMk")
+     dash
      ;; markdown
-     org
+     html
+     (org :variables
+          org-enable-reveal-js-support t)
+     spacemacs-org
      (shell :variables
              shell-default-height 30
              shell-default-position 'bottom)
      ;; spell-checking
      ;; syntax-checking
-     ;; version-control
+     version-control
+     puppet
      )
-   ;; List of additional packages that will be installed without being
+   ;; List of additional packages that will be installed without being feR
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+     atom-one-dark-theme
+     elpy
+     ox-ioslide
+   )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
-   dotspacemacs-delete-orphan-packages t))
+   dotspacemacs-delete-orphan-packages t)
+  )
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -85,7 +104,7 @@ values."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'nil
+   dotspacemacs-startup-banner 'official
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects' `official'.
    ;; (default '(recents projects))
@@ -110,7 +129,8 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
+                               :size 15
+                               :spacing 5
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -243,6 +263,8 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (custom-set-variables '(spacemacs-theme-custom-colors
+                          '((bg1 . "#282a36"))))
   )
 
 (defun dotspacemacs/user-config ()
@@ -258,9 +280,145 @@ you should place your code here."
   (setq powerline-default-separator 'alternate)
   (spaceline-compile)
   (setq initial-buffer-choice t)
+  (setq-default global-visual-line-mode t)
+  (setq diff-hl-side 'left)
+
+  ;; Visual line navigation for textual modes
+  (spacemacs/toggle-truncate-lines-on)
+  (add-hook 'text-mode-hook 'spacemacs/toggle-visual-line-navigation-on)
+
+  ;; Org-mode
+  (with-eval-after-load 'org
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((python . t)))
+    )
+  ;; Adds keys for opening default org-mode
+  (defun open-todo-org ()
+    (interactive)
+    (find-file "~/Work/Notes/todo.org"))
+  (global-set-key (kbd "<C-s-268632079>") 'open-todo-org)
+
+  ;; Adds Sublime text like line movement capabilities
+  (global-set-key (kbd "<C-s-up>") 'move-text-line-up)
+  (global-set-key (kbd "<C-s-down>") 'move-text-line-down)
+
+  ;; Set autocomplete on by default
+  ;; (global-company-mode)
+  ;; ########## JAVASCRIPT THINGS ##################
+  ;; use web-mode for .jsx files
+  (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+
+  ;; http://www.flycheck.org/manual/latest/index.html
+  ;; (require 'flycheck)
+
+  ;; turn on flychecking globally
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+
+  ;; disable jshint since we prefer eslint checking
+  (setq-default flycheck-disabled-checkers
+                (append flycheck-disabled-checkers
+                        '(javascript-jshint)))
+
+  ;; use eslint with web-mode for jsx files
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+
+  ;; customize flycheck temp file prefix
+  (setq-default flycheck-temp-prefix ".flycheck")
+
+  ;; disable json-jsonlist checking for json files
+  (setq-default flycheck-disabled-checkers
+                (append flycheck-disabled-checkers
+                        '(json-jsonlist)))
+
+  ;; https://github.com/purcell/exec-path-from-shell
+  ;; only need exec-path-from-shell on OSX
+  ;; this hopefully sets up path and other vars better
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize))
+
+  ;; Javascript Configurations
+  (setq-default js2-basic-offset 2)
+  (setq-default js-indent-level 2)
+  (setq js2-strict-missing-semi-warning nil)
+  ;; ########## JAVASCRIPT THINGS ##################
+
+  ;; Python Things
+  ;;(add-hook 'python-mode-hook 'anaconda-mode)
+  ;;(eval-after-load "company"
+  ;; '(add-to-list 'company-backends '(company-anaconda :with company-capf)))
+
+  ;; Latex things
+  ;; AucTeX
+;; (setq TeX-auto-save t)
+;; (setq TeX-parse-self t)
+;; (setq-default TeX-master nil)
+;; (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+;; (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+;; (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+;; (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+;; (setq reftex-plug-into-AUCTeX t)
+;; (setq TeX-PDF-mode t)
+;; ((set LaTeX-mode-hook this-original-command)
+;;  ;; This command adds the capabilty of processing on-the-fly
+;;  (conolve-idiom-for 't)
+;;  )
+;; ;; Use Skim as viewer, enable source <-> PDF sync
+;; ;; make latexmk available via C-c C-c
+;; ;; Note: SyncTeX is setup via ~/.latexmkrc (see below)
+;; (add-hook 'LaTeX-mode-hook (lambda ()
+;;   (push
+;;     '("latexmk" "latexmk -pdf %s" TeX-run-TeX nil t
+;;       :help "Run latexmk on file")
+;;     TeX-command-list)))
+;; (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
+
+;; ;; use Skim as default pdf viewer
+;; ;; Skim's displayline is used for forward search (from .tex to .pdf)
+;; ;; option -b highlights the current line; option -g opens Skim in the background
+;; (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
+;; (setq TeX-view-program-list
+;;      ;; '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n \"%o\" \"%b\" ")))
+;;       (setq TeX-view-program-list '(("emacs" "emacsclient -n %o") ("PDF Viewer" "/Applications/Skim.app/Contents SharedSupport/displayline -b -g %n %o %b"))))
+  ;; Latex
+  ;; Use Skim on macOS to utilize synctex.
+  ;; Confer https://mssun.me/blog/spacemacs-and-latex.html
+  (setq TeX-source-correlate-mode t)
+  (setq TeX-source-correlate-start-server t)
+  (setq TeX-source-correlate-method 'synctex)
+  ;; AucTex recognizes some standard viewers, but the default view command
+  ;; does not appear to sync.
+  (setq TeX-view-program-list
+        '(("Okular" "okular --unique %o#src:%n`pwd`/./%b")
+          ("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")
+          ("Zathura"
+           ("zathura %o"
+            (mode-io-correlate
+             " --synctex-forward %n:0:%b -x \"emacsclient +%{line} %{input}\"")))))
+  (cond
+   ((spacemacs/system-is-mac) (setq TeX-view-program-selection '((output-pdf "Skim"))))
+   ;; For linux, use Okular or perhaps Zathura.
+   ((spacemacs/system-is-linux) (setq TeX-view-program-selection '((output-pdf "Okular")))))
 )
 
-
-
-;; Do not write anythi fng past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (chruby inf-ruby define-word yapfify xterm-color ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tagedit stickyfunc-enhance srefactor spacemacs-theme spaceline smeargle slim-mode shell-pop scss-mode sass-mode reveal-in-osx-finder restart-emacs rainbow-mode rainbow-identifiers rainbow-delimiters quelpa pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el pbcopy paradox ox-reveal ox-ioslide osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file neotree mwim multi-term move-text magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode launchctl json-mode js2-refactor js-doc info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ flycheck flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elpy elisp-slime-nav ein dumb-jump diff-hl dash-at-point cython-mode company-web company-tern company-statistics company-quickhelp company-auctex company-anaconda column-enforce-mode color-identifiers-mode coffee-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-compile auctex-latexmk atom-one-dark-theme aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+ '(spacemacs-theme-custom-colors (quote ((bg1 . "#282a36")))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)
