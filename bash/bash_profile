@@ -13,6 +13,9 @@ export PATH=$PATH:~/dotfiles/bin
 # Adds the Latex binaries to PATH
 export PATH=$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
 
+# Adds path for GO installation
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+
 # Lines added to remove use of sudo with npm install
 export NPM_PACKAGES="${HOME}/.npm-packages"
 export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
