@@ -110,6 +110,15 @@ alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pa
 
 # Pipe AWS OTP into the system clipboard.
 alias awsotp="aws_otp | tee >(pbcopy) && echo '=> Copied AWS OTP to pasteboard.'"
+alias vpnotp="vpn_otp | tee >(pbcopy) && echo '=> Copied VPN OTP to pasteboard.'"
+alias vpn2otp="vpn2_otp | tee >(pbcopy) && echo '=> Copied VPN OTP to pasteboard.'"
+
+# stop completion for zsh on certain commands.
+alias ssh='nocorrect ssh'
+alias retry='nocorrect retry'
+
+# fixes .z files in the $HOME directory
+export _Z_DATA="/Users/anmol.j/dotfiles/zsh/z/.z"
 
 # Recursively delete `.DS_Store` files
 #alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
