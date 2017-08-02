@@ -33,3 +33,6 @@
 ;;  (global-set-key (kbd "C-k") 'delete-line-no-kill)
 (global-set-key (kbd "C-k") 'delete-line-no-kill)
 
+;; Adds Sublime text like line movement capabilities
+(global-set-key (kbd "<C-s-up>") 'move-text-line-up)
+(global-set-key (kbd "<C-s-down>") 'move-text-line-down)
