@@ -71,6 +71,10 @@ values."
      elpy
      ox-ioslide
      org-trello
+     use-package
+     spaceline-all-the-icons
+     all-the-icons
+     emojify
    )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -325,11 +329,23 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (tool-bar-mode)
+
+  ;;Setup .spacemacs.d as a source for cleaning the config
+  (add-to-list 'load-path "~/.spacemacs.d/")
+  (load-library "init-keys")
+
+  ;; Adds emoji to Emacs
+  (global-emojify-mode)
+
+  (require 'spaceline-all-the-icons)
+  (use-package spaceline-all-the-icons
+    :after spaceline
+    :config (spaceline-all-the-icons-theme))
+  (spaceline-toggle-all-the-icons-buffer-position-on)
   (rainbow-delimiters-mode)
   (smartparens-mode)
-  (setq powerline-default-separator 'alternate)
-  (spaceline-compile)
+  ;;(setq powerline-default-separator 'alternate)
+  ;;(spaceline-compile)
   (setq initial-buffer-choice t)
   (setq-default global-visual-line-mode t)
   (setq diff-hl-side 'left)
@@ -358,6 +374,26 @@ you should place your code here."
   ;;(add-hook 'python-mode-hook 'anaconda-mode)
   ;;(eval-after-load "company"
   ;; '(add-to-list 'company-backends '(company-anaconda :with company-capf)))
+
+  ;; Latex
+  ;; Use Skim on macOS to utilize synctex.
+  ;; Confer https://mssun.me/blog/spacemacs-and-latex.html
+  (setq TeX-source-correlate-mode t)
+  (setq TeX-source-correlate-start-server t)
+  (setq TeX-source-correlate-method 'synctex)
+  ;; AucTex recognizes some standard viewers, but the default view command
+  ;; does not appear to sync.
+  (setq TeX-view-program-list
+        '(("Okular" "okular --unique %o#src:%n`pwd`/./%b")
+          ("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")
+          ("Zathura"
+           ("zathura %o"
+            (mode-io-correlate
+             " --synctex-forward %n:0:%b -x \"emacsclient +%{line} %{input}\"")))))
+  (cond
+   ((spacemacs/system-is-mac) (setq TeX-view-program-selection '((output-pdf "Skim"))))
+   ;; For linux, use Okular or perhaps Zathura.
+   ((spacemacs/system-is-linux) (setq TeX-view-program-selection '((output-pdf "Okular")))))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -367,10 +403,11 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
  '(org-trello-current-prefix-keybinding "C-c o")
  '(package-selected-packages
    (quote
-    (smartparens helm-core yapfify yaml-mode xterm-color web-mode web-beautify unfill tagedit stickyfunc-enhance srefactor smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder rbenv rake rainbow-mode rainbow-identifiers pytest pyenv-mode py-isort puppet-mode pug-mode pip-requirements pbcopy ox-reveal ox-ioslide makey osx-trash osx-dictionary orgit org-trello request-deferred org-projectile org-present org-pomodoro alert log4e gntp org-download mwim multi-term minitest magit-gitflow livid-mode live-py-mode less-css-mode launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js-doc hy-mode htmlize helm-pydoc helm-gitignore helm-dash helm-css-scss helm-company helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help emmet-mode elpy pyvenv find-file-in-project ivy ein skewer-mode deferred websocket js2-mode simple-httpd diff-hl dash-at-point cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-quickhelp pos-tip company-auctex company-anaconda company color-identifiers-mode coffee-mode chruby bundler inf-ruby auto-yasnippet yasnippet auctex-latexmk auctex anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
+    (emojify firestarter spaceline-all-the-icons evil projectile helm hydra dash all-the-icons-dired all-the-icons memoize font-lock+ smartparens helm-core yapfify yaml-mode xterm-color web-mode web-beautify unfill tagedit stickyfunc-enhance srefactor smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder rbenv rake rainbow-mode rainbow-identifiers pytest pyenv-mode py-isort puppet-mode pug-mode pip-requirements pbcopy ox-reveal ox-ioslide makey osx-trash osx-dictionary orgit org-trello request-deferred org-projectile org-present org-pomodoro alert log4e gntp org-download mwim multi-term minitest magit-gitflow livid-mode live-py-mode less-css-mode launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js-doc hy-mode htmlize helm-pydoc helm-gitignore helm-dash helm-css-scss helm-company helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help emmet-mode elpy pyvenv find-file-in-project ivy ein skewer-mode deferred websocket js2-mode simple-httpd diff-hl dash-at-point cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-quickhelp pos-tip company-auctex company-anaconda company color-identifiers-mode coffee-mode chruby bundler inf-ruby auto-yasnippet yasnippet auctex-latexmk auctex anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
  '(spacemacs-theme-custom-colors (quote ((bg1 . "#282a36")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
