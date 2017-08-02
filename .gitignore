@@ -11,3 +11,9 @@ tmux/tmux/plugins/
 #############################
 /zsh/z
 
+
+# Files that are symlinks to other projects
+###########################################
+bin/aws_otp
+bin/vpn2_otp
+bin/vpn_otp
