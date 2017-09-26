@@ -1,0 +1,13 @@
+pls() {
+
+   echo ''
+   echo 'No problem!'
+   echo ''
+
+   if [ $# -eq 0 ]
+   then
+        sudo $(fc -ln -1)
+   else
+        sudo $@
+   fi
+}
