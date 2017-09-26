@@ -10,6 +10,7 @@ dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
 files="atom
 	icons
+    hammerspoon
 	node/npmrc
 	zsh/oh-my-zsh
 	zsh/zshrc
