@@ -1,0 +1,9 @@
+# Shows files in ~/dotfiles to edit in vim
+# Inspired from spacemacs SPC f e d command.
+ 
+fed() {
+  cd ~/dotfiles
+  local files
+  IFS=$'\n' files=($(fzf --query="$1" --multi --select-1 --exit-0))
+  [[ -n "$files" ]] && vim "${files[@]}"
+}
