@@ -25,17 +25,17 @@ function token_keystroke(token_name, chars)
 end
 
 -- Cmd-Alt-A : Type AWS Token
-hs.hotkey.bind({"cmd", "alt"}, "A", function()
+hs.hotkey.bind(mash, "A", function()
     token_keystroke("token_aws", "07")
 end)
 
 -- Cmd-Alt-V-1 : Type VPN1 Token
-hs.hotkey.bind({"cmd", "alt"}, "1", function()
+hs.hotkey.bind(mash, "1", function()
     token_keystroke("token_vpn", "06")
 end)
 
 -- Cmd-Alt-V-2 : Type VPN2 Token
-hs.hotkey.bind({"cmd", "alt"}, "2", function()
+hs.hotkey.bind(mash, "2", function()
     token_keystroke("token_vpn2", "06")
 end)
 
