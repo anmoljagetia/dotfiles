@@ -70,7 +70,6 @@ autocmd filetype python nnoremap<F10> :!pdb % <CR>
 
 autocmd BufNewFile *.cpp r /home/lenovo/template.cpp
 
-
 set t_Co=256
 set background=light
 set guifont=Source\ Code\ Pro\14
@@ -119,7 +118,7 @@ catch
 endtry
 
 " Adds the following to edit files without opening them as sudo
-cmap w!! w !sudo tee > /dev/null %
+cmap W w !sudo tee > /dev/null %
 
 " Leave insert mode without ESC key
 inoremap fj <ESC>
