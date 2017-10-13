@@ -40,7 +40,8 @@ values."
      ;; ----------------------------------------------------------------
      (auto-completion :variables
                       auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-help-tooltip 'manual)
+                      auto-completion-enable-help-tooltip 'manual
+                      :disabled-for elisp)
      python
      ipython-notebook
      semantic
@@ -73,7 +74,10 @@ values."
      all-the-icons
      spaceline-all-the-icons
      emojify
-     firestarter
+     atom-one-dark-theme
+     flatland-theme
+     dracula-theme
+     vcl-mode
    )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -153,12 +157,13 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("SauceCodePro Nerd Font"
                                :size 15
-                               :spacing 5
+                               :spacing 10
                                :weight normal
                                :width normal
-                               :powerline-scale 1.3)
+                               :powerline-offset 2
+                               :powerline-scale 1.8)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
@@ -276,7 +281,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers 't
+   dotspacemacs-line-numbers 'relative
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -331,8 +336,8 @@ you should place your code here."
 
   ;;Setup .spacemacs.d as a source for cleaning the config
   (add-to-list 'load-path "~/.spacemacs.d/")
-  (load-library "init-latex")    ;; LaTeX things.
-  (load-library "init-keys")     ;; Some custom key-bindings.
+  (load-library "init-latex")      ;; LaTeX things.
+  (load-library "init-keys")       ;; Some custom key-bindings.
 
   ;; Adds emoji to Emacs
   (global-emojify-mode)
@@ -368,6 +373,12 @@ you should place your code here."
     (find-file "/Users/anmol.j/Work/Project/Notes/todo.org"))
   (global-set-key (kbd "<C-s-268632079>") 'open-todo-org)
 
+  ;; Prevent cursor creep
+  (setq evil-move-cursor-back nil)
+
+  ;; Disable evil shift round
+  (setq evil-shift-round nil)
+
   ;; Python Things
   ;;(add-hook 'python-mode-hook 'anaconda-mode)
   ;;(eval-after-load "company"
@@ -381,12 +392,56 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(Linum-format "%7i ")
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   (vector "#ffffff" "#f36c60" "#8bc34a" "#fff59d" "#4dd0e1" "#b39ddb" "#81d4fa" "#263238"))
  '(evil-want-Y-yank-to-eol nil)
+ '(fci-rule-character-color "#202020")
+ '(fci-rule-color "#202020" t)
+ '(fringe-mode 4 nil (fringe))
+ '(hl-sexp-background-color "#1c1f26")
+ '(main-line-color1 "#1E1E1E")
+ '(main-line-color2 "#111111")
+ '(main-line-separator-style (quote chamfer))
  '(org-trello-current-prefix-keybinding "C-c o")
  '(package-selected-packages
    (quote
-    (org-category-capture emojify firestarter spaceline-all-the-icons evil projectile helm hydra dash all-the-icons-dired all-the-icons memoize font-lock+ smartparens helm-core yapfify yaml-mode xterm-color web-mode web-beautify unfill tagedit stickyfunc-enhance srefactor smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder rbenv rake rainbow-mode rainbow-identifiers pytest pyenv-mode py-isort puppet-mode pug-mode pip-requirements pbcopy ox-reveal ox-ioslide makey osx-trash osx-dictionary orgit org-trello request-deferred org-projectile org-present org-pomodoro alert log4e gntp org-download mwim multi-term minitest magit-gitflow livid-mode live-py-mode less-css-mode launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js-doc hy-mode htmlize helm-pydoc helm-gitignore helm-dash helm-css-scss helm-company helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help emmet-mode elpy pyvenv find-file-in-project ivy ein skewer-mode deferred websocket js2-mode simple-httpd diff-hl dash-at-point cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-quickhelp pos-tip company-auctex company-anaconda company color-identifiers-mode coffee-mode chruby bundler inf-ruby auto-yasnippet yasnippet auctex-latexmk auctex anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
- '(spacemacs-theme-custom-colors (quote ((bg1 . "#282a36")))))
+    (iedit goto-chg s vcl-mode dracula-theme flatland-theme farmhouse-theme reykjavik-theme material-theme atom-one-dark-theme atom-dark-theme graphviz-dot-mode spacegray-theme packed avy async org-category-capture emojify firestarter spaceline-all-the-icons evil projectile helm hydra dash all-the-icons-dired all-the-icons memoize font-lock+ smartparens helm-core yapfify yaml-mode xterm-color web-mode web-beautify unfill tagedit stickyfunc-enhance srefactor smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder rbenv rake rainbow-mode rainbow-identifiers pytest pyenv-mode py-isort puppet-mode pug-mode pip-requirements pbcopy ox-reveal ox-ioslide makey osx-trash osx-dictionary orgit org-trello request-deferred org-projectile org-present org-pomodoro alert log4e gntp org-download mwim multi-term minitest magit-gitflow livid-mode live-py-mode less-css-mode launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js-doc hy-mode htmlize helm-pydoc helm-gitignore helm-dash helm-css-scss helm-company helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help emmet-mode elpy pyvenv find-file-in-project ivy ein skewer-mode deferred websocket js2-mode simple-httpd diff-hl dash-at-point cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-quickhelp pos-tip company-auctex company-anaconda company color-identifiers-mode coffee-mode chruby bundler inf-ruby auto-yasnippet yasnippet auctex-latexmk auctex anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
+ '(powerline-color1 "#1E1E1E")
+ '(powerline-color2 "#111111")
+ '(spacemacs-theme-custom-colors (quote ((bg1 . "#282a36"))))
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#f36c60")
+     (40 . "#ff9800")
+     (60 . "#fff59d")
+     (80 . "#8bc34a")
+     (100 . "#81d4fa")
+     (120 . "#4dd0e1")
+     (140 . "#b39ddb")
+     (160 . "#f36c60")
+     (180 . "#ff9800")
+     (200 . "#fff59d")
+     (220 . "#8bc34a")
+     (240 . "#81d4fa")
+     (260 . "#4dd0e1")
+     (280 . "#b39ddb")
+     (300 . "#f36c60")
+     (320 . "#ff9800")
+     (340 . "#fff59d")
+     (360 . "#8bc34a"))))
+ '(vc-annotate-very-old-color nil)
+ '(when
+      (or
+       (not
+        (boundp
+         (quote ansi-term-color-vector)))
+       (not
+        (facep
+         (aref ansi-term-color-vector 0))))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
