@@ -48,4 +48,5 @@ Commands.choose = function()
     chooser:show()
 end
 
+hs.hotkey.bind(mash, "E", function() Commands.choose() end)
 return Commands
