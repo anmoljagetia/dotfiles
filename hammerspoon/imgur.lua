@@ -1,6 +1,5 @@
 -- imgur upload from pasteboard
 
-
 -- read a password from a keychain
 function password_from_keychain(name)
     -- 'name' should be saved in the login keychain
@@ -30,6 +29,7 @@ hs.hotkey.bind(hyper, "U", function()
           if status == 200 then
             local response = hs.json.decode(body)
             local imageURL = response.data.link
+            hs.pasteboard.setContents(imageURL)
             hs.urlevent.openURLWithBundle(imageURL, hs.urlevent.getDefaultHandler("http"))
           end
         end)
