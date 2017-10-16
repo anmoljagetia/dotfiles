@@ -7,7 +7,6 @@ loggerInfo = hs.logger.new('My Settings', 'info')
 require 'battery'
 require 'beat-paste-blocking'
 require 'caffeine'
-require 'cheatsheets'
 require 'double_cmd_q_to_quit'
 require 'emoji'
 require 'imgur'
@@ -20,16 +19,16 @@ require 'window-management'
 
 require 'hs-totp'
 require 'hs-anycomplete'
+require 'hs-tabs'
 
 -- Lock System
 hs.hotkey.bind(hyper, 'Q', 'Lock system', function() hs.caffeinate.lockScreen() end)
 -- Sleep system
 hs.hotkey.bind(hyper, 'S', 'Put system to sleep',function() hs.caffeinate.systemSleep() end)
 
-
 -- Window Hints
---hs.hints.style = 'vimperator'
---hs.hotkey.bind(hyper, 'H', 'Show window hints', hs.hints.windowHints)
+hs.hints.style = 'vimperator'
+hs.hotkey.bind(hyper, 'H', 'Show window hints', hs.hints.windowHints)
 
 -- Load TextClipboardHistory Spoon 
 hs.loadSpoon("TextClipboardHistory")
@@ -54,3 +53,4 @@ weather.start()
 --tiling.set('layouts', {
 --  'fullscreen', 'main-vertical'
 --})
+
