@@ -1,5 +1,5 @@
 --- === hs.tabs ===
----
+--- Inspired from: https://github.com/trishume/dotfiles/blob/master/hammerspoon/hammerspoon.symlink/tabs.lua
 --- Place the windows of an application into tabs drawn on its titlebar
 local tabs = {}
 
