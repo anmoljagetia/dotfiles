@@ -40,17 +40,17 @@ local weather = require('hs-weather')
 weather.start()
 
 -- Tiling Manager
---local tiling = require('hs-tiling')
---local hotkey = require('hs.hotkey')
---
---hotkey.bind(mash, "c", function() tiling.cycleLayout() end)
---hotkey.bind(mash, "j", function() tiling.cycle(1) end)
---hotkey.bind(mash, "k", function() tiling.cycle(-1) end)
---hotkey.bind(mash, "space", function() tiling.promote() end)
---hotkey.bind(mash, "f", function() tiling.goToLayout("fullscreen") end)
---
----- If you want to set the layouts that are enabled
---tiling.set('layouts', {
---  'fullscreen', 'main-vertical'
---})
+local tiling = require('hs-tiling')
+local hotkey = require('hs.hotkey')
+
+hotkey.bind(mash, "c", function() tiling.cycleLayout() end)
+hotkey.bind(mash, "j", function() tiling.cycle(1) end)
+hotkey.bind(mash, "k", function() tiling.cycle(-1) end)
+hotkey.bind(mash, "space", function() tiling.promote() end)
+hotkey.bind(mash, "f", function() tiling.goToLayout("fullscreen") end)
+
+-- If you want to set the layouts that are enabled
+tiling.set('layouts', {
+  'fullscreen', 'main-vertical'
+})
 
