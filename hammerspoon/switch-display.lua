@@ -22,7 +22,7 @@ function isInScreen(screen, win)
   return win:screen() == screen
 end
 
--- Brings focus to the scren by setting focus on the front-most application in it.
+-- Brings focus to the screen by setting focus on the front-most application in it.
 -- Also move the mouse cursor to the center of the screen. This is because
 -- Mission Control gestures & keyboard shortcuts are anchored, oddly, on where the
 -- mouse is focused.
@@ -37,8 +37,10 @@ function focusScreen(screen)
   windowToFocus:focus()
 
   -- Move mouse to center of screen
-  local pt = geometry.rectMidPoint(screen:fullFrame())
-  mouse.setAbsolutePosition(pt)
+  --local pt = geometry.rectMidPoint(screen:fullFrame())
+  local pt = hs.geometry.rectMidPoint(hs.mouse.getCurrentScreen():next():fullFrame())
+  hs.mouse.setAbsolutePosition(pt)
 end
 
+-- Mouse switching logic taken and adapted from : https://gist.github.com/sthtodo/51710df48cf6110e758f
 -- END DISPLAY FOCUS SWITCHING --
