@@ -9,12 +9,12 @@
 
 --Bring focus to next display/screen
 hs.hotkey.bind(hyper, "1", function ()
-  focusScreen(hs.window.focusedWindow():screen():next())
+  focusScreen(hs.window.focusedWindow():screen():next(), hs.mouse.getCurrentScreen():next())
 end)
 
 --Bring focus to previous display/screen
 hs.hotkey.bind(hyper, "`", function() 
-  focusScreen(hs.window.focusedWindow():screen():previous())
+  focusScreen(hs.window.focusedWindow():screen():previous(), hs.mouse.getCurrentScreen():previous())
 end)
 
 --Predicate that checks if a window belongs to a screen
@@ -26,7 +26,7 @@ end
 -- Also move the mouse cursor to the center of the screen. This is because
 -- Mission Control gestures & keyboard shortcuts are anchored, oddly, on where the
 -- mouse is focused.
-function focusScreen(screen)
+function focusScreen(screen, mouse)
   --Get windows within screen, ordered from front to back.
   --If no windows exist, bring focus to desktop. Otherwise, set focus on
   --front-most application window.
@@ -38,7 +38,7 @@ function focusScreen(screen)
 
   -- Move mouse to center of screen
   --local pt = geometry.rectMidPoint(screen:fullFrame())
-  local pt = hs.geometry.rectMidPoint(hs.mouse.getCurrentScreen():next():fullFrame())
+  local pt = hs.geometry.rectMidPoint(mouse:fullFrame())
   hs.mouse.setAbsolutePosition(pt)
 end
 
