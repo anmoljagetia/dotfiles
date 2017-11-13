@@ -89,9 +89,9 @@ local function setWeatherTitle(app, unitSys, temp)
   if unitSys == 'C' then
     local tempCelsius = toCelsius(temp)
     local tempRounded = math.floor(tempCelsius * 10 + 0.5) / 10
-    app:setTitle(tempRounded .. ' °C  ')
+    app:setTitle(tempRounded .. ' °C')
   else
-    app:setTitle(temp .. ' °F  ')
+    app:setTitle(temp .. ' °F')
   end
 end
 
