@@ -1,2 +1,6 @@
-alias tcssh_es="tcssh 10.6.21.5 10.6.21.6 10.6.21.7 10.6.21.8 10.6.21.9 10.6.21.10 10.6.21.11 10.6.21.12 10.6.21.13"
-alias brew-cask-update='brew cask outdated | awk '{print $1}' | xargs brew cask reinstall'
+alias tcssh_es="tcssh 10.6.21.5 10.6.21.6 10.6.21.7 10.6.21.8 10.6.21.9 10.6.21.11 10.6.21.12 10.6.21.13 10.6.21.14 10.6.21.15"
+alias brew-cask-update="brew cask outdated | awk '{print $1}' | xargs brew cask reinstall"
+
+cssh() {
+    tcssh `curl server.sem-internal.srv.media.net/$1 -s | xargs`
+}
