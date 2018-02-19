@@ -20,6 +20,8 @@ require 'window-management'
 require 'hs-totp'
 require 'hs-anycomplete'
 require 'hs-tabs'
+require 'hs-worktime'
+require 'hs-layout'
 
 -- Lock System
 hs.hotkey.bind(hyper, 'Q', 'Lock system', function() hs.caffeinate.lockScreen() end)
