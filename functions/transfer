@@ -31,7 +31,7 @@ transfer() {
             rm -f $zipfile
         else
             # transfer file
-            curl --progress-bar -H "Max-Downloads: 1" -H "Max-Days: 5" --upload-file "$file" "https://transfer.sh/$basefile" >> "$tmpfile"
+            curl --progress-bar -H "Max-Downloads: 5" -H "Max-Days: 5" --upload-file "$file" "https://transfer.sh/$basefile" >> "$tmpfile"
         fi
     else
         # transfer pipe
