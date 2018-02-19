@@ -9,22 +9,22 @@
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
 files="atom
-	icons
+    icons
     hammerspoon
-	node/npmrc
-	zsh/oh-my-zsh
-	zsh/zshrc
-	zsh/zshenv
-	vim/vim
-	vim/vimrc
-	tmux/tmux.conf
-	tmux/tmux
-	git/gitconfig
-	bash/bashrc
-	bash/bash_profile
-	mongo/mongorc.js
-	heroku/netrc
-	emacs/spacemacs
+    node/npmrc
+    zsh/oh-my-zsh
+    zsh/zshrc
+    zsh/zshenv
+    vim/vim
+    vim/vimrc
+    tmux/tmux.conf
+    tmux/tmux
+    git/gitconfig
+    bash/bashrc
+    bash/bash_profile
+    mongo/mongorc.js
+    heroku/netrc
+    emacs/spacemacs
 "    # list of files/folders to symlink in homedir
 ##########
 
@@ -40,8 +40,8 @@ echo "done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
 for file in $files; do
-	f=${file}
-	f=${f##*/}
+    f=${file}
+    f=${f##*/}
     echo "Moving any existing dotfiles from ~ to $olddir"
     mv ~/.$f ~/dotfiles_old/
     echo "Creating symlink to $file in home directory."
