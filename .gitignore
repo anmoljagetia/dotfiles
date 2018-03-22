@@ -17,3 +17,5 @@ tmux/tmux/plugins/
 bin/aws_otp
 bin/vpn2_otp
 bin/vpn_otp
+bin/cli53
+bin/mdbook
