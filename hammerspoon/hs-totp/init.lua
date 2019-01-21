@@ -39,6 +39,11 @@ hs.hotkey.bind(mash, "2", function()
     token_keystroke("token_vpn2", "06")
 end)
 
+-- Cmd-Alt-Ctrl-3 : Type SSL VPN Token
+hs.hotkey.bind(mash, "3", function()
+    token_keystroke("token_vpn3", "06")
+end)
+
 -- Cmd-Alt-Ctrl-B : Type Bitconnect Token
 hs.hotkey.bind(mash, "B", function()
     token_keystroke("token_bitconnect", "06")

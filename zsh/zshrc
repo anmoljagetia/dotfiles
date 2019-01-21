@@ -124,6 +124,12 @@ export _Z_DATA="/Users/anmol.j/dotfiles/zsh/z/.z"
 # local aliases
 source "/Users/anmol.j/dotfiles/zsh/local_alias"
 
+# Conda installation
+source /Users/anmol.j/miniconda3/etc/profile.d/conda.sh
+
+# Add GitHub Token
+export HOMEBREW_GITHUB_API_TOKEN=9f473f8a3c28a7e2f045e622061269b746d28e55
+
 # Recursively delete `.DS_Store` files
 #alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
 
