@@ -24,18 +24,32 @@ function token_keystroke(token_name, chars)
     hs.eventtap.keyStrokes(hash)
 end
 
--- Cmd-Alt-A : Type AWS Token
+-- Cmd-Alt-Ctrl-A : Type AWS Token
 hs.hotkey.bind(mash, "A", function()
     token_keystroke("token_aws", "07")
 end)
 
--- Cmd-Alt-V-1 : Type VPN1 Token
+-- Cmd-Alt-Ctrl-1 : Type VPN1 Token
 hs.hotkey.bind(mash, "1", function()
     token_keystroke("token_vpn", "06")
 end)
 
--- Cmd-Alt-V-2 : Type VPN2 Token
+-- Cmd-Alt-Ctrl-2 : Type VPN2 Token
 hs.hotkey.bind(mash, "2", function()
     token_keystroke("token_vpn2", "06")
 end)
 
+-- Cmd-Alt-Ctrl-3 : Type SSL VPN Token
+hs.hotkey.bind(mash, "3", function()
+    token_keystroke("token_vpn3", "06")
+end)
+
+-- Cmd-Alt-Ctrl-B : Type Bitconnect Token
+hs.hotkey.bind(mash, "B", function()
+    token_keystroke("token_bitconnect", "06")
+end)
+
+-- Cmd-Alt-Ctrl-B : Type Media.net Gmail Token
+hs.hotkey.bind(mash, "M", function()
+    token_keystroke("token_gmail_mnet", "06")
+end)

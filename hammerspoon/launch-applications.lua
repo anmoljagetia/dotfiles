@@ -18,6 +18,7 @@ local appShortCuts = {
     S = 'Sublime Text',
     T = 'iterm',
     V = 'vlc',
+    W = 'Firefox',
     X = 'Xcode',
     Z = 'Franz'
 }

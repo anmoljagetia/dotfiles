@@ -1,4 +1,7 @@
 ;; -*- mode: emacs-lisp -*-
+;; This file is loaded by Spacemacs at startup.
+;; It must be stored in your home directory.
+
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
@@ -28,10 +31,11 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     yaml
-     (javascript :variables
-                 javascript-disable-tern-port-files nil)
      html
+     ;;(javascript :variables
+     ;;            javascript-disable-tern-port-files nil)
+     ;;restclient
+     ;;html
      colors
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -43,17 +47,20 @@ values."
                       auto-completion-enable-help-tooltip 'manual
                       :disabled-for elisp)
      python
-     ipython-notebook
      semantic
      better-defaults
      osx
-     emacs-lisp
+     ;;dash
      git
      (latex :variables latex-build-command "LatexMk")
-     ;; markdown
+     (markdown :variables markdown-live-preview-engine 'vmd)
+     pandoc
+     yaml
      (org :variables
+          org-enable-github-support t
           org-enable-reveal-js-support t)
      spacemacs-org
+     ;;(spacemacs-spaceline :location local)
      (shell :variables
              shell-default-height 30
              shell-default-position 'bottom)
@@ -67,19 +74,16 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
-     elpy
      ox-ioslide
-     org-trello
      use-package
      all-the-icons
      spaceline-all-the-icons
-     emojify
      atom-one-dark-theme
      flatland-theme
-     dracula-theme
-     vcl-mode
-   )
-   ;; A list of packages and/or extensions that will not be install and loaded.
+     dracula-theme)
+   ;; A list of packages that cannot be updated.
+   dotspacemacs-frozen-packages '()
+   ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '()
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -132,7 +136,7 @@ values."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner nil
+   dotspacemacs-startup-banner 'nil
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
@@ -225,6 +229,11 @@ values."
    ;; define the position to display `helm', options are `bottom', `top',
    ;; `left', or `right'. (default 'bottom)
    dotspacemacs-helm-position 'bottom
+   ;; Controls fuzzy matching in helm. If set to `always', force fuzzy matching
+   ;; in all non-asynchronous sources. If set to `source', preserve individual
+   ;; source settings. Else, disable fuzzy matching in all sources.
+   ;; (default 'always)
+   dotspacemacs-helm-use-fuzzy 'always
    ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content. (default nil)
    dotspacemacs-enable-paste-transient-state nil
@@ -281,7 +290,8 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers '(:relative t
+                               :size-limit-kb 1024)
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -334,13 +344,11 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  ;;Setup .spacemacs.d as a source for cleaning the config
+    ;;Setup .spacemacs.d as a source for cleaning the config
   (add-to-list 'load-path "~/.spacemacs.d/")
   (load-library "init-latex")      ;; LaTeX things.
   (load-library "init-keys")       ;; Some custom key-bindings.
-
-  ;; Adds emoji to Emacs
-  (global-emojify-mode)
+  (load-library "init-evil-mc")       ;; Some custom key-bindings.
 
   (require 'spaceline-all-the-icons)
   (use-package spaceline-all-the-icons
@@ -352,8 +360,8 @@ you should place your code here."
 
   (rainbow-delimiters-mode)
   (smartparens-mode)
-  ;; (setq powerline-default-separator 'alternate)
-  ;; (spaceline-compile)
+  (setq powerline-default-separator 'alternate)
+  (spaceline-compile)
   (setq initial-buffer-choice t)
   (setq diff-hl-side 'left)
 
@@ -379,69 +387,27 @@ you should place your code here."
   ;; Disable evil shift round
   (setq evil-shift-round nil)
 
+  ;; set paradox token
+  (setq paradox-github-token "ec85dbde3e3a9e4a2399b901da6194cc1550c82e")
+
   ;; Python Things
   ;;(add-hook 'python-mode-hook 'anaconda-mode)
   ;;(eval-after-load "company"
   ;; '(add-to-list 'company-backends '(company-anaconda :with company-capf)))
-)
+  )
+;; ----------------------------------- DO NOT EDIT DOWN FROM HERE ----------------------------------------------------
 
-;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(Linum-format "%7i ")
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   (vector "#ffffff" "#f36c60" "#8bc34a" "#fff59d" "#4dd0e1" "#b39ddb" "#81d4fa" "#263238"))
  '(evil-want-Y-yank-to-eol nil)
- '(fci-rule-character-color "#202020")
- '(fci-rule-color "#202020" t)
- '(fringe-mode 4 nil (fringe))
- '(hl-sexp-background-color "#1c1f26")
- '(main-line-color1 "#1E1E1E")
- '(main-line-color2 "#111111")
- '(main-line-separator-style (quote chamfer))
- '(org-trello-current-prefix-keybinding "C-c o")
  '(package-selected-packages
    (quote
-    (iedit goto-chg s vcl-mode dracula-theme flatland-theme farmhouse-theme reykjavik-theme material-theme atom-one-dark-theme atom-dark-theme graphviz-dot-mode spacegray-theme packed avy async org-category-capture emojify firestarter spaceline-all-the-icons evil projectile helm hydra dash all-the-icons-dired all-the-icons memoize font-lock+ smartparens helm-core yapfify yaml-mode xterm-color web-mode web-beautify unfill tagedit stickyfunc-enhance srefactor smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder rbenv rake rainbow-mode rainbow-identifiers pytest pyenv-mode py-isort puppet-mode pug-mode pip-requirements pbcopy ox-reveal ox-ioslide makey osx-trash osx-dictionary orgit org-trello request-deferred org-projectile org-present org-pomodoro alert log4e gntp org-download mwim multi-term minitest magit-gitflow livid-mode live-py-mode less-css-mode launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js-doc hy-mode htmlize helm-pydoc helm-gitignore helm-dash helm-css-scss helm-company helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help emmet-mode elpy pyvenv find-file-in-project ivy ein skewer-mode deferred websocket js2-mode simple-httpd diff-hl dash-at-point cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-quickhelp pos-tip company-auctex company-anaconda company color-identifiers-mode coffee-mode chruby bundler inf-ruby auto-yasnippet yasnippet auctex-latexmk auctex anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
- '(powerline-color1 "#1E1E1E")
- '(powerline-color2 "#111111")
- '(spacemacs-theme-custom-colors (quote ((bg1 . "#282a36"))))
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#f36c60")
-     (40 . "#ff9800")
-     (60 . "#fff59d")
-     (80 . "#8bc34a")
-     (100 . "#81d4fa")
-     (120 . "#4dd0e1")
-     (140 . "#b39ddb")
-     (160 . "#f36c60")
-     (180 . "#ff9800")
-     (200 . "#fff59d")
-     (220 . "#8bc34a")
-     (240 . "#81d4fa")
-     (260 . "#4dd0e1")
-     (280 . "#b39ddb")
-     (300 . "#f36c60")
-     (320 . "#ff9800")
-     (340 . "#fff59d")
-     (360 . "#8bc34a"))))
- '(vc-annotate-very-old-color nil)
- '(when
-      (or
-       (not
-        (boundp
-         (quote ansi-term-color-vector)))
-       (not
-        (facep
-         (aref ansi-term-color-vector 0))))))
+    (pandoc-mode ox-pandoc vmd-mode yapfify yaml-mode xterm-color web-mode unfill tagedit stickyfunc-enhance srefactor spaceline-all-the-icons smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder rbenv rake rainbow-mode rainbow-identifiers pyvenv pytest pyenv-mode py-isort puppet-mode pug-mode pip-requirements pbcopy ox-reveal ox-ioslide makey ox-gfm osx-trash osx-dictionary orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim multi-term mmm-mode minitest markdown-toc markdown-mode magit-gitflow live-py-mode less-css-mode launchctl hy-mode dash-functional htmlize helm-pydoc helm-gitignore helm-css-scss helm-company helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flatland-theme evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help emojify ht emmet-mode dracula-theme diff-hl cython-mode company-web web-completion-data company-statistics company-quickhelp pos-tip company-auctex company-anaconda company color-identifiers-mode chruby bundler inf-ruby auto-yasnippet yasnippet auctex-latexmk auctex atom-one-dark-theme anaconda-mode pythonic all-the-icons memoize ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+ '(spacemacs-theme-custom-colors (quote ((bg1 . "#282a36")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

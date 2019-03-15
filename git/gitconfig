@@ -5,11 +5,16 @@
 [apply]
     whitespace = fix
 [core]
-    excludesfile = ~/.gitignore_global
+    excludesfile = /Users/anmol.j/.gitignore_global
     attributesfile = ~/.gitattributes
     whitespace = fix,space-before-tab,tab-in-indent,trailing-space
-    pager = less -r
+    pager = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less
     editor = /usr/local/bin/vim
+[color "diff-highlight"]
+	oldNormal = red
+	oldHighlight = red 52	# xterm colors https://jonasjacek.github.io/colors/
+	newNormal = green
+	newHighlight = green 22
 [color "branch"]
     current = yellow reverse
     local = yellow
@@ -34,3 +39,5 @@
 [mergetool "sourcetree"]
     cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
     trustExitCode = true
+[commit]
+    template = /Users/anmol.j/.stCommitMsg

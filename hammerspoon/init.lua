@@ -11,7 +11,6 @@ require 'double_cmd_q_to_quit'
 require 'emoji'
 require 'imgur'
 require 'launch-applications'
-require 'launch-chrome-applications'
 require 'red-shift'
 require 'reload-config'
 require 'switch-display'
@@ -20,6 +19,8 @@ require 'window-management'
 require 'hs-totp'
 require 'hs-anycomplete'
 require 'hs-tabs'
+require 'hs-worktime'
+require 'hs-layout'
 
 -- Lock System
 hs.hotkey.bind(hyper, 'Q', 'Lock system', function() hs.caffeinate.lockScreen() end)
@@ -41,13 +42,12 @@ weather.start()
 
 -- Tiling Manager
 local tiling = require('hs-tiling')
-local hotkey = require('hs.hotkey')
 
-hotkey.bind(mash, "c", function() tiling.cycleLayout() end)
-hotkey.bind(mash, "j", function() tiling.cycle(1) end)
-hotkey.bind(mash, "k", function() tiling.cycle(-1) end)
-hotkey.bind(mash, "space", function() tiling.promote() end)
-hotkey.bind(mash, "f", function() tiling.goToLayout("fullscreen") end)
+hs.hotkey.bind(mash, "c", function() tiling.cycleLayout() end)
+hs.hotkey.bind(mash, "j", function() tiling.cycle(1) end)
+hs.hotkey.bind(mash, "k", function() tiling.cycle(-1) end)
+hs.hotkey.bind(mash, "space", function() tiling.promote() end)
+hs.hotkey.bind(mash, "f", function() tiling.goToLayout("fullscreen") end)
 
 -- If you want to set the layouts that are enabled
 tiling.set('layouts', {
