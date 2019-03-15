@@ -4,7 +4,7 @@
 # Usage: extract <file>
 # Description: extracts archived files / mounts disk images
 # Note: .dmg/hdiutil is Mac OS X-specific.
-if [ -f $1 ]; then
+if [[ -f $1 ]]; then
     case $1 in
         *.tar.bz2)  tar -jxvf $1                        ;;
         *.tar.gz)   tar -zxvf $1                        ;;
@@ -20,8 +20,8 @@ if [ -f $1 ]; then
         *.pax.Z)    uncompress $1 --stdout | pax -r     ;;
         *.Z)        uncompress $1                       ;;
         *.7z)       7z x $1                             ;;
-        *.rar)       unrar x $1                         ;;
-        *.RAR)       unrar x $1                         ;;
+        *.rar)       unrar e $1                         ;;
+        *.RAR)       unrar e $1                         ;;
         *)          echo "'$1' cannot be extracted/mounted via extract()" ;;
     esac
 else
