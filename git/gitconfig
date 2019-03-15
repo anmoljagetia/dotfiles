@@ -8,8 +8,13 @@
     excludesfile = /Users/anmol.j/.gitignore_global
     attributesfile = ~/.gitattributes
     whitespace = fix,space-before-tab,tab-in-indent,trailing-space
-    pager = less -r
+    pager = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less
     editor = /usr/local/bin/vim
+[color "diff-highlight"]
+	oldNormal = red
+	oldHighlight = red 52	# xterm colors https://jonasjacek.github.io/colors/
+	newNormal = green
+	newHighlight = green 22
 [color "branch"]
     current = yellow reverse
     local = yellow
