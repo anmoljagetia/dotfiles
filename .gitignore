@@ -19,3 +19,7 @@ bin/vpn2_otp
 bin/vpn_otp
 bin/cli53
 bin/mdbook
+
+# Files that contain private informations like tokens etc
+#########################################################
+emacs/spacemacs.d/init-private.el

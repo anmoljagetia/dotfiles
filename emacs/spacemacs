@@ -349,6 +349,7 @@ you should place your code here."
   (load-library "init-latex")      ;; LaTeX things.
   (load-library "init-keys")       ;; Some custom key-bindings.
   (load-library "init-evil-mc")       ;; Some custom key-bindings.
+  (load-library "init-private")       ;; Token to download packages
 
   (require 'spaceline-all-the-icons)
   (use-package spaceline-all-the-icons
@@ -375,20 +376,12 @@ you should place your code here."
      'org-babel-load-languages
      '((python . t)))
     )
-  ;; Adds keys for opening default org-mode
-  (defun open-todo-org ()
-    (interactive)
-    (find-file "/Users/anmol.j/Work/Project/Notes/todo.org"))
-  (global-set-key (kbd "<C-s-268632079>") 'open-todo-org)
 
   ;; Prevent cursor creep
   (setq evil-move-cursor-back nil)
 
   ;; Disable evil shift round
   (setq evil-shift-round nil)
-
-  ;; set paradox token
-  (setq paradox-github-token "ec85dbde3e3a9e4a2399b901da6194cc1550c82e")
 
   ;; Python Things
   ;;(add-hook 'python-mode-hook 'anaconda-mode)
