@@ -119,19 +119,20 @@ alias ssh='nocorrect ssh'
 alias retry='nocorrect retry'
 
 # fixes .z files in the $HOME directory
-export _Z_DATA="/Users/anmol.j/dotfiles/zsh/z/.z"
+export _Z_DATA="/Users/anmol/dotfiles/zsh/z/.z"
 
 # local aliases
-source "/Users/anmol.j/dotfiles/zsh/local_alias"
+source "/Users/anmol/dotfiles/zsh/local_alias"
 
 # Conda installation
-source /Users/anmol.j/miniconda3/etc/profile.d/conda.sh
-
-# Add GitHub Token
-export HOMEBREW_GITHUB_API_TOKEN=9f473f8a3c28a7e2f045e622061269b746d28e55
+source /usr/local/miniconda3/etc/profile.d/conda.sh
 
 # Recursively delete `.DS_Store` files
 #alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
 
-# Source the configuration from grc to color the default linux commands
-#source /usr/local/etc/grc.bashrc
+# Add brew ncurses to PATH
+export PATH="/usr/local/opt/ncurses/bin:$PATH"
+
+# use .localrc for SUPER SECRET STUFF that you don't
+# want in your public, versioned repo.
+[ -f ~/.localrc ] && . ~/.localrc
