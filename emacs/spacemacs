@@ -59,8 +59,6 @@ values."
      (org :variables
           org-enable-github-support t
           org-enable-reveal-js-support t)
-     spacemacs-org
-     ;;(spacemacs-spaceline :location local)
      (shell :variables
              shell-default-height 30
              shell-default-position 'bottom)
@@ -68,6 +66,8 @@ values."
      ;; syntax-checking
      version-control
      puppet
+     myleetcode
+     ;;tabbar
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -76,12 +76,11 @@ values."
    dotspacemacs-additional-packages '(
      ox-ioslide
      use-package
-     all-the-icons
-     spaceline-all-the-icons
      atom-one-dark-theme
      flatland-theme
      doom-themes
      ob-async)
+
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -359,12 +358,11 @@ you should place your code here."
   (add-to-list 'load-path "~/.spacemacs.d/")
   (load-library "init-latex")         ;; LaTeX things.
   (load-library "init-keys")          ;; Some custom key-bindings.
-  (load-library "init-evil-mc")       ;; Some custom key-bindings.
+  (load-library "init-evil-mc")       ;; These are settings to implement multi-cursors.
   (load-library "init-private")       ;; Token to download packages
   (load-library "init-org-fix")       ;; Lines to get the org-expansion for > 9.2 verison of org
   (load-library "init-spaceline")     ;; Lines to recompile spaceline
   (load-library "init-python")        ;; Config for Python Mode
-
 
   (rainbow-delimiters-mode)
   (smartparens-mode)
