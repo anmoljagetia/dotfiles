@@ -70,6 +70,7 @@ autocmd filetype python nnoremap<F10> :!pdb % <CR>
 
 autocmd BufNewFile *.cpp r /home/lenovo/template.cpp
 
+set encoding=utf-8 " Necessary to show Unicode glyphs
 set t_Co=256
 set background=light
 set guifont=Source\ Code\ Pro\14
