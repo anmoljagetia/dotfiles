@@ -1,5 +1,5 @@
 # Shrug - Because I try to do my best.
 
 shrug() {
-     echo '¯\_(ツ)_/¯'| tee >(pbcopy) && echo '=> Copied AWS OTP to pasteboard.'
+     echo '¯\_(ツ)_/¯'| tee >(pbcopy) && echo '=> Copie to pasteboard.'
 }
