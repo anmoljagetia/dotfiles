@@ -46,7 +46,7 @@ local tiling = require('hs-tiling')
 hs.hotkey.bind(mash, "c", function() tiling.cycleLayout() end)
 hs.hotkey.bind(mash, "j", function() tiling.cycle(1) end)
 hs.hotkey.bind(mash, "k", function() tiling.cycle(-1) end)
-hs.hotkey.bind(mash, "space", function() tiling.promote() end)
+hs.hotkey.bind(mash, "s", function() tiling.promote() end)
 hs.hotkey.bind(mash, "f", function() tiling.goToLayout("fullscreen") end)
 
 -- If you want to set the layouts that are enabled
