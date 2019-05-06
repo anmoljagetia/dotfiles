@@ -13,6 +13,7 @@ local appShortCuts = {
     I = 'Iridium',
     J = 'Jump Desktop',
     M = 'Go for Gmail',
+    N = 'nvALT',
     O = 'Microsoft Onenote',
     P = 'Lastpass',
     S = 'Sublime Text',
