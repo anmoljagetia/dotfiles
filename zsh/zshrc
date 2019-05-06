@@ -46,7 +46,7 @@ ZSH_CUSTOM=~/oh-my-zsh/custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(emacs git github python colored-man-pages zsh-autosuggestions fast-syntax-highlighting history-substring-search z zaw osx)
+plugins=(emacs git github python colored-man-pages zsh-autosuggestions fast-syntax-highlighting history-search-multi-word history-substring-search z zaw osx)
 #plugins=(git zsh-syntax-highlighting github last-working-dir python sublime)
 source $ZSH/oh-my-zsh.sh
 
@@ -119,10 +119,10 @@ alias ssh='nocorrect ssh'
 alias retry='nocorrect retry'
 
 # fixes .z files in the $HOME directory
-export _Z_DATA="/Users/anmol/dotfiles/zsh/z/.z"
+export _Z_DATA="$HOME/dotfiles/zsh/z/.z"
 
 # Conda installation
-source /usr/local/miniconda3/etc/profile.d/conda.sh
+#source /usr/local/miniconda3/etc/profile.d/conda.sh
 
 # Recursively delete `.DS_Store` files
 #alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
