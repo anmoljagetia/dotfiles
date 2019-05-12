@@ -1,4 +1,4 @@
-#+begin_src bash
+#+begin_src
 
 
                    d88P          888          888     .d888 d8b 888
@@ -16,8 +16,8 @@ d888888888P     d88P         .d88888  .d88b.  888888 888888 888 888  .d88b.  .d8
 
 * Dotfiles
 
-I really like to configure my system in every possible way so that it can be geared towards a more personalized experience. This repository holds how I do it.
-The goal here is to update my machine with Better™ system defaults, preferences, software configuration and even auto-install some handy development tools and apps.
+I really like to configure my system in every possible way so that it can be used for a more personalized experience. This repository holds how I do it.
+The goal here is to update my machine with better™ system defaults, preferences, software configuration and even auto-install some handy development tools and apps.
 
 * Installation
 
@@ -35,20 +35,36 @@ cd ~/dotfiles
 
 The dotfiles are organized in the following way
 
-|-------------+---------------------------------------------------------------------------------------------|
-| directory   | purpose                                                                                     |
-|-------------+---------------------------------------------------------------------------------------------|
-| Terminal    | Settings for the colors and settings for the macos terminal and iterm                       |
-| bash        | My bash shell configurations                                                                |
-| bin         | Stores all the handy nifty binaries that I use. This directory is also added to system path |
-| emacs       | My emacs settings                                                                           |
-| functions   | These functions are lazy loaded using z shell                                               |
-| git         | My git settings                                                                             |
-| hammerspoon | Hammerspoon settings for macos automation                                                   |
-| install.sh  | The installer script                                                                        |
-| node        | Node packages and defaults                                                                  |
-| sublime     | Settings for ST3. Slightly outdated since I don't use sublime extensively anymore           |
-| tmux        | My tmux configuration                                                                       |
-| vim         | My vim configuration                                                                        |
-| zsh         | My z-shell configuration                                                                    |
-|-------------+---------------------------------------------------------------------------------------------|
+|--------------+---------------------------------------------------------------------------------------------|
+| directory    | purpose                                                                                     |
+|--------------+---------------------------------------------------------------------------------------------|
+| Terminal     | Settings for the colors and settings for the macos terminal and iterm                       |
+| bash         | My bash shell configurations                                                                |
+| bin          | Stores all the handy nifty binaries that I use. This directory is also added to system path |
+| external_bin | Stores all the external binaries that need to be added to PATH                              |
+| emacs        | My emacs settings                                                                           |
+| functions    | These functions are lazy loaded using z shell                                               |
+| git          | My git settings                                                                             |
+| hammerspoon  | Hammerspoon settings for macos automation                                                   |
+| install.sh   | The installer script                                                                        |
+| node         | Node packages and defaults                                                                  |
+| sublime      | Settings for ST3. Slightly outdated since I don't use sublime extensively anymore           |
+| tmux         | My tmux configuration                                                                       |
+| vim          | My vim configuration                                                                        |
+| zsh          | My z-shell configuration                                                                    |
+|--------------+---------------------------------------------------------------------------------------------|
+
+** Terminal
+
+This directory contains the custom colorschemes that I use with iterm and terminal applications. These colors are optimised for dark backgrounds and my colorschemes.
+
+** bash
+
+
+** bin
+
+This directory is added to path and containes lot of nice small utilities that I use frequently.
+
+** emacs
+
+   This directory contains my =.spacemacs= and my =.spacemacs.d= directories. These personal configs will be moved to a personal layer in the future.
