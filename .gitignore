@@ -30,4 +30,13 @@ emacs/spacemacs.d/.spacemacs.env
 # Move downloaded binaries to seperate folder
 ##############################################
 external_bin/*
-!external_bin/README.org
+!external_bin/README.*
+
+# Add an exception for the .spacemacs.d folder
+###############################################
+emacs/spacemacs.d/layers/*
+emacs/spacemacs.d/snippets/*
+emacs/spacemacs.d/local/*
+!emacs/spacemacs.d/layers/README.*
+!emacs/spacemacs.d/snippets/README.*
+!emacs/spacemacs.d/local/README.*
