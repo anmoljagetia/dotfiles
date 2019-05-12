@@ -30,4 +30,4 @@ emacs/spacemacs.d/.spacemacs.env
 # Move downloaded binaries to seperate folder
 ##############################################
 external_bin/*
-!external_bin/README.md
+!external_bin/README.org
