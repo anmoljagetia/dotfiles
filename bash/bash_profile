@@ -10,6 +10,9 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # Path for user installed Binaries
 export PATH=$PATH:~/dotfiles/bin 
 
+# Path for user installed binaries that are executables
+export PATH=$PATH:~/dotfiles/external_bin
+
 # Adds the Latex binaries to PATH
 export PATH=$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
 
