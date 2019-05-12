@@ -37,6 +37,9 @@ external_bin/*
 emacs/spacemacs.d/layers/*
 emacs/spacemacs.d/snippets/*
 emacs/spacemacs.d/local/*
+emacs/spacemacs.d/templates/*
 !emacs/spacemacs.d/layers/README.*
 !emacs/spacemacs.d/snippets/README.*
 !emacs/spacemacs.d/local/README.*
+!emacs/spacemacs.d/templates/README.*
+
