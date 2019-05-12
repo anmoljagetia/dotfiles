@@ -1,3 +1,17 @@
-# External Binaries in Dotfiles
+* External Binaries in Dotfiles
 
-This is where I store all the binaries that I download of the Internet but don't necessarily want to put them in my verison control.
+This is where I store all the binaries that I download of the Internet but don't necessarily want to put them in my verison control. The binaries that I have here at the moment are the following :
+
+|------------+-----------------------------------------------+------------------------------------------------------|
+| Binary     | Utility                                       | Download Source                                      |
+|------------+-----------------------------------------------+------------------------------------------------------|
+| cli53      | Used to manipulate DNS over Route53           | https://github.com/barnybug/cli53/releases           |
+| fzf        | Used as a narroing search                     | brew install fzf                                     |
+| gomi       | Utility to delete and restore files for macos | brew tap b4b4r07/gomi && brew install gomi           |
+| jq         | Used to manipulate JSON                       | brew install jq                                      |
+| leetcode   | Used to interact with Leetcode on CLI         | https://github.com/skygragon/leetcode-cli/releases   |
+| mdbook     | Used to maintain gitbook like docs            | https://github.com/rust-lang-nursery/mdBook/releases |
+| ngrok      | Expose localhost as tunnel on the Internet    | https://ngrok.com/download                           |
+| peco       | Alternative to fzf                            | https://github.com/peco/peco/releases                |
+| youtube-dl | Used to download youtube videos               | https://ytdl-org.github.io/youtube-dl/download.html  |
+|------------+-----------------------------------------------+------------------------------------------------------|
