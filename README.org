@@ -60,11 +60,39 @@ This directory contains the custom colorschemes that I use with iterm and termin
 
 ** bash
 
+There are two major files here. =bash_profile= and =bashrc=. Since I don't use bash extensively, my bashrc is pretty basic however I use =bash_profile= to load all the folders that I need to add to system PATH and configure other environments.
 
-** bin
+** bin/external_bin
 
-This directory is added to path and containes lot of nice small utilities that I use frequently.
+ This directory is added to path and containes lot of nice small utilities that I use frequently. The =external_bin= directory is used to store binaries that are downloaded of the internet. This is done to avoid adding them to version control and have a central place where they can be accessed and re-downloaded on any new computer. There is also a documentation available in the =external_bin= repo.
 
 ** emacs
 
-   This directory contains my =.spacemacs= and my =.spacemacs.d= directories. These personal configs will be moved to a personal layer in the future.
+This directory contains my =.spacemacs= and my =.spacemacs.d= directories. These personal configs will be moved to a personal layer in the future.
+
+** functions
+
+This is where all functions are stored. These are lazy loaded at run-time so the prompt doesn't get slow. There are a lots of them and they provide for accessing utilities that are installed on the system in a more efficient manner.
+
+** git
+
+This is where my =git_config= sits. It's extremely minimal and there is also a global =gitignore_global= that I use.
+
+** hammerspoon
+
+This is one of the most important folders in my dotfiles. Hammerspoon has transformed the way I use my mac. I have so many additonal shortcuts and customizations setup using Hammerspoon that I will have to maintain a seperate Wiki for the same.
+
+** node
+
+Configurations for nodejs installation.
+
+** sublime
+
+Configuration for Sublime Text. These are old and unmaintained since I don't use Sublime Text anymore.
+
+
+** tmux
+
+** vim
+
+** zsh
