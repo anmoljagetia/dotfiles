@@ -1,0 +1,333 @@
+#!/usr/bin/env ruby
+# Sizes - Calculate and sort all filesizes for current folder
+# Includes directory sizes, colorized output
+# Brett Terpstra 2019 WTF License
+VERSION = "1.0.0"
+
+require 'shellwords'
+
+# Just including term-ansicolor by @flori and avoiding all the
+# rigamarole of requiring multiple files when it's not a gem... - Brett
+#
+# ansicolor Copyright: Florian Frank
+# License: <https://github.com/flori/term-ansicolor/blob/master/COPYING>
+# Home: <https://github.com/flori/term-ansicolor>
+module Term
+
+  # The ANSIColor module can be used for namespacing and mixed into your own
+  # classes.
+  module ANSIColor
+    # require 'term/ansicolor/version'
+
+    # :stopdoc:
+    ATTRIBUTES = [
+      [ :clear              ,   0 ],     # String#clear is already used to empty string in Ruby 1.9
+      [ :reset              ,   0 ],     # synonym for :clear
+      [ :bold               ,   1 ],
+      [ :dark               ,   2 ],
+      [ :italic             ,   3 ],     # not widely implemented
+      [ :underline          ,   4 ],
+      [ :underscore         ,   4 ],     # synonym for :underline
+      [ :blink              ,   5 ],
+      [ :rapid_blink        ,   6 ],     # not widely implemented
+      [ :negative           ,   7 ],     # no reverse because of String#reverse
+      [ :concealed          ,   8 ],
+      [ :strikethrough      ,   9 ],     # not widely implemented
+      [ :black              ,  30 ],
+      [ :red                ,  31 ],
+      [ :green              ,  32 ],
+      [ :yellow             ,  33 ],
+      [ :blue               ,  34 ],
+      [ :magenta            ,  35 ],
+      [ :cyan               ,  36 ],
+      [ :white              ,  37 ],
+      [ :on_black           ,  40 ],
+      [ :on_red             ,  41 ],
+      [ :on_green           ,  42 ],
+      [ :on_yellow          ,  43 ],
+      [ :on_blue            ,  44 ],
+      [ :on_magenta         ,  45 ],
+      [ :on_cyan            ,  46 ],
+      [ :on_white           ,  47 ],
+      [ :intense_black      ,  90 ],    # High intensity, aixterm (works in OS X)
+      [ :intense_red        ,  91 ],
+      [ :intense_green      ,  92 ],
+      [ :intense_yellow     ,  93 ],
+      [ :intense_blue       ,  94 ],
+      [ :intense_magenta    ,  95 ],
+      [ :intense_cyan       ,  96 ],
+      [ :intense_white      ,  97 ],
+      [ :on_intense_black   , 100 ],    # High intensity background, aixterm (works in OS X)
+      [ :on_intense_red     , 101 ],
+      [ :on_intense_green   , 102 ],
+      [ :on_intense_yellow  , 103 ],
+      [ :on_intense_blue    , 104 ],
+      [ :on_intense_magenta , 105 ],
+      [ :on_intense_cyan    , 106 ],
+      [ :on_intense_white   , 107 ]
+    ]
+
+    ATTRIBUTE_NAMES = ATTRIBUTES.transpose.first
+    # :startdoc:
+
+    # Returns true if Term::ANSIColor supports the +feature+.
+    #
+    # The feature :clear, that is mixing the clear color attribute into String,
+    # is only supported on ruby implementations, that do *not* already
+    # implement the String#clear method. It's better to use the reset color
+    # attribute instead.
+    def support?(feature)
+      case feature
+      when :clear
+        !String.instance_methods(false).map(&:to_sym).include?(:clear)
+      end
+    end
+    # Returns true, if the coloring function of this module
+    # is switched on, false otherwise.
+    def self.coloring?
+      @coloring
+    end
+
+    # Turns the coloring on or off globally, so you can easily do
+    # this for example:
+    #  Term::ANSIColor::coloring = STDOUT.isatty
+    def self.coloring=(val)
+      @coloring = val
+    end
+    self.coloring = true
+
+    ATTRIBUTES.each do |c, v|
+      eval <<-EOT
+        def #{c}(string = nil)
+          result = ''
+          result << "\e[#{v}m" if Term::ANSIColor.coloring?
+          if block_given?
+            result << yield
+          elsif string.respond_to?(:to_str)
+            result << string.to_str
+          elsif respond_to?(:to_str)
+            result << to_str
+          else
+            return result #only switch on
+          end
+          result << "\e[0m" if Term::ANSIColor.coloring?
+          result
+        end
+      EOT
+    end
+
+    # Regular expression that is used to scan for ANSI-sequences while
+    # uncoloring strings.
+    COLORED_REGEXP = /\e\[(?:(?:[349]|10)[0-7]|[0-9])?m/
+
+    # Returns an uncolored version of the string, that is all
+    # ANSI-sequences are stripped from the string.
+    def uncolored(string = nil) # :yields:
+      if block_given?
+        yield.to_str.gsub(COLORED_REGEXP, '')
+      elsif string.respond_to?(:to_str)
+        string.to_str.gsub(COLORED_REGEXP, '')
+      elsif respond_to?(:to_str)
+        to_str.gsub(COLORED_REGEXP, '')
+      else
+        ''
+      end
+    end
+
+    module_function
+
+    # Returns an array of all Term::ANSIColor attributes as symbols.
+    def attributes
+      ATTRIBUTE_NAMES
+    end
+    extend self
+  end
+end
+
+# Begin sizes
+
+class String
+
+  include Term::ANSIColor
+
+  # ensure trailing slash
+  def slashit
+    self.sub(/\/?$/,'/')
+  end
+
+  # colorize a human readable size format by size
+  def color_fmt
+    case self
+    when /\dB?$/
+      self.blue
+    when /\dKB?$/
+      self.green
+    when /\dMB?$/
+      self.yellow
+    when /\dGB?$/
+      self.red
+    else
+      self.bold.red
+    end
+  end
+
+  # colorize files by type (directories and hidden files)
+  def color_file(force_check=false)
+    filename = self.dup
+    if force_check && File.directory?(filename)
+      filename.sub!(/\/?$/,'/')
+    end
+
+    case filename
+    when /\/$/
+      filename.green
+    when /^\./
+      filename.white
+    else
+      filename.bold.white
+    end
+  end
+
+  # Replace $HOME in path with ~
+  def short_dir
+    home = ENV['HOME']
+    self.sub(/#{home}/, '~')
+  end
+
+  # Convert a line like `120414 filename` to a colorized string with
+  # human readable size
+  def line_to_human
+    parts = self.split(/\t/)
+    if parts[0] =~ /NO ACCESS/
+      "  ERROR".red + " " + parts[1].color_file
+    else
+      size = to_human(parts[0].to_i).color_fmt
+      size.pad_escaped(7) + " " + parts[1].color_file
+    end
+  end
+
+  # Pad a line containing ansi escape codes to a given length, ignoring
+  # the escape codes
+  def pad_escaped(len)
+    str = self.dup
+    str.gsub!(/\e\[\d+m/,'')
+    prefix = ""
+    while prefix.length + str.length < len
+      prefix += " "
+    end
+    prefix + self
+  end
+end
+
+# Convert a number (assumed bytes) to a human readable format (12.5K)
+def to_human(n,fmt=false)
+  count = 0
+  formats = %w(B K M G T P E Z Y)
+
+  while  (fmt || n >= 1024) && count < 8
+    n /= 1024.0
+    count += 1
+    break if fmt && formats[count][0].upcase =~ /#{fmt[0].upcase}/
+  end
+
+  format("%.2f%s",n,formats[count])
+end
+
+# Use `du` to size a single directory and all of its contents. This
+# number is returned in blocks (512B), so the human readable result may
+# be slightly different than you'd get from `ls` or a GUI file manager
+def du_size_single(dir)
+  res = %x{du -s #{Shellwords.escape(dir)} 2>/dev/null}.strip
+  if $?.success?
+    parts = res.split(/\t/)
+    (parts[0].to_i * 512).to_s + "\t" + parts[1].strip
+  else
+    "NO ACCESS\t#{dir}"
+  end
+end
+
+# main function
+def all_sizes(dir)
+  # Use `ls` to list all files in the target with long info
+  files = %x{ls -lSrAF #{dir.slashit} 2>/dev/null}
+  unless $?.success?
+    $stdout.puts "Error getting file listing".red
+    Process.exit 1
+  end
+  files = files.strip.split(/\n/)
+
+  files.delete_if {|line|
+    line.strip =~ /^total \d+/
+  }
+
+  # trim file list to just size and filename
+  files.map! {|line|
+    line.sub(/\S{10,11} +\d+ +\S+ +\w+ +(\d+) +\w{3} +\d+ +[\d:]+ +(.*?)$/, "\\1\t\\2")
+  }
+
+
+  # if a line is a path to a directory, use `du` to update its size with
+  # the total filesize of the directory contents.
+  files.map! {|entry|
+    file = entry.split(/\t/)[1]
+    if File.directory?(file)
+      du_size_single(file)
+    else
+      entry
+    end
+  }
+
+  # Sort by size (after updating directory sizes)
+  files.sort! {|a,b|
+    size1 = a.split(/\t/)[0].to_i
+    size2 = b.split(/\t/)[0].to_i
+    size1 <=> size2
+  }
+
+  # Output each line with human-readable size and colorization
+  files.each {|entry|
+    $stdout.puts entry.line_to_human
+  }
+  # Include a total for the directory
+  $stdout.puts "-------".black.bold
+  $stdout.puts(du_size_single(dir).short_dir.line_to_human)
+end
+
+def help
+  app = File.basename(__FILE__)
+  help =<<EOHELP
+
+#{app.bold.white} #{VERSION.green} by Brett Terpstra
+  Display a human-readable list of sizes for all files and directories.
+
+usage:
+  $ #{app.bold.white} [directory]
+
+Leaving directory blank operates in the current working directory.
+
+EOHELP
+  puts help
+  Process.exit 0
+end
+
+# Assume operating on current directory...
+dir = ENV['PWD']
+
+# ...unless an argument is provided
+if ARGV[0]
+  # Add some help. Why not?
+  if ARGV[0] =~ /^-?-h(elp)?/
+    help
+  elsif ARGV[0] =~ /^-?-v(ersion)?/
+    $stdout.puts File.basename(__FILE__) + " v" + VERSION
+    Process.exit 0
+  else
+    argdir = File.expand_path(ARGV[0])
+    if File.directory?(argdir)
+      dir = argdir
+    end
+  end
+end
+
+all_sizes(dir)
+
