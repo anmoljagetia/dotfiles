@@ -104,7 +104,7 @@ alias fs="stat -f \"%z bytes\""
 export TERM="xterm-256color"
 
 # User Git Aliases
-alias gbd='git-better-diff'
+alias gbdf='git-better-diff'
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
