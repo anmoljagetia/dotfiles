@@ -9,7 +9,7 @@
     attributesfile = ~/.gitattributes
     whitespace = fix,space-before-tab,tab-in-indent,trailing-space
     pager = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less
-    editor = /usr/local/bin/vim
+    editor = vim
 [color "diff-highlight"]
 	oldNormal = red
 	oldHighlight = red 52	# xterm colors https://jonasjacek.github.io/colors/
