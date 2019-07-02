@@ -5,7 +5,7 @@
 [apply]
     whitespace = fix
 [core]
-    excludesfile = /Users/anmol.j/.gitignore_global
+    excludesfile = /Users/anmol/.gitignore_global
     attributesfile = ~/.gitattributes
     whitespace = fix,space-before-tab,tab-in-indent,trailing-space
     pager = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less
@@ -29,7 +29,7 @@
     changed = green
     untracked = cyan
 [user]
-    email = anmol.j@media.net
+    email = anmoljagetia@gmail.com
     name = Anmol Jagetia
 [push]
     default = simple

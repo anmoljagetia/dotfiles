@@ -74,7 +74,7 @@ This function should only modify configuration layer settings."
      version-control
      puppet
      ;; Personal Layers
-     (myleetcode2  :variables
+     (myleetcode  :variables
                    leetcode-prefer-language "python3")
      my-ch-sh-layer
      my-grammarly-layer
