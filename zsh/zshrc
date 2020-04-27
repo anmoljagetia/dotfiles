@@ -114,6 +114,9 @@ alias awsotp="aws_otp | tee >(pbcopy) && echo '=> Copied AWS OTP to pasteboard.'
 alias vpnotp="vpn_otp | tee >(pbcopy) && echo '=> Copied VPN OTP to pasteboard.'"
 alias vpn2otp="vpn2_otp | tee >(pbcopy) && echo '=> Copied VPN OTP to pasteboard.'"
 
+# Get all the IPs from AWS 
+alias awsips="aws ec2 describe-instances --query 'Reservations[].Instances[].{_:PublicIpAddress}' --output text"
+
 # stop completion for zsh on certain commands.
 alias ssh='nocorrect ssh'
 alias retry='nocorrect retry'
@@ -134,3 +137,4 @@ export PATH="/usr/local/opt/ncurses/bin:$PATH"
 # use .localrc for SUPER SECRET STUFF that you don't
 # want in your public, versioned repo.
 [ -f ~/.localrc ] && . ~/.localrc
+
