@@ -22,8 +22,8 @@ local cfg = {}
 cfg = {
   awareness = {
     time = {
-      chimeAfter  = 30,           -- mins
-      chimeRepeat = 4,            -- seconds between repeated chimes
+      chimeAfter  = 30,     -- mins
+      chimeRepeat = 4,      -- seconds between repeated chimes
     },
     chime = {
       file = ufile.toPath(soundsDir, 'bowl.wav'),
@@ -356,7 +356,7 @@ function m.nextMode()
 end
 
 function m.start()
-  mode = K.MODE.AWARENESS
+  mode = K.MODE.POMODORO.WORK
   menu = hs.menubar.new()
   menu:setClickCallback(menuClickCallback)
   hs.notify.register(ID, onNotificationClick)
