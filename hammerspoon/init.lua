@@ -4,7 +4,7 @@ mash = { "cmd", "alt", "ctrl" }
 
 loggerInfo = hs.logger.new('My Settings', 'info')
 
-require 'battery'
+--require 'battery'
 require 'beat-paste-blocking'
 require 'caffeine'
 require 'double_cmd_q_to_quit'

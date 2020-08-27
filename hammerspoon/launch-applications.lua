@@ -21,7 +21,7 @@ local appShortCuts = {
     V = 'vlc',
     W = 'Firefox',
     X = 'Xcode',
-    Z = 'Franz'
+    Z = 'Ferdi'
 }
 
 for key, app in pairs(appShortCuts) do
