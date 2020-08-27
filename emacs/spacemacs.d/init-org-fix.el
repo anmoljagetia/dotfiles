@@ -8,5 +8,8 @@
 (with-eval-after-load 'org
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((python . t)))
+   '((python3 . t))
+   '((python . t))
+   '((sh . t))
+   )
   )
