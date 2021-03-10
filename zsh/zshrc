@@ -134,6 +134,16 @@ export ZSHZ_DATA="$HOME/dotfiles/zsh/z/.z"
 # Add brew ncurses to PATH
 export PATH="/usr/local/opt/ncurses/bin:$PATH"
 
+# Set history file location and size.
+export HISTSIZE=100000 SAVEHIST=100000
+setopt extended_history         # Write hist file as ":start:elapsed;command"
+setopt hist_expire_dups_first   # Expire dup entries first when trimming history
+setopt hist_ignore_all_dups     # Delete old entry if new entry is a duplicate
+setopt inc_append_history       # Write hist file immediately, not at shell exit
+setopt share_history            # Share history between all sessions
+setopt hist_find_no_dups        # Do not display a line previously found
+setopt hist_reduce_blanks       # Remove extra blanks before recording entry
+
 # use .localrc for SUPER SECRET STUFF that you don't
 # want in your public, versioned repo.
 [ -f ~/.localrc ] && . ~/.localrc
